@@ -13,6 +13,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import esqueletos.Usuario;
+import esqueletos.tipo_usuario;
 import hibernate.HibernateUtil;
 
 @WebServlet("/UsuarioController")
@@ -27,7 +28,12 @@ public class UsuarioController extends HttpServlet{
 		session = factory.openSession();
 	}
 	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws IOException{
-		response.getWriter().append("GET");
+		Usuario us = session.get(Usuario.class, 2);
+		if(us==null){
+			return;
+		}
+		tipo_usuario tu = us.getT_u();
+		response.getWriter().append("GET "+tu.getDescripcion());
 	}
 	protected void doPost(HttpServletRequest request,HttpServletResponse response) throws IOException{
 		String username = request.getParameter("user");
