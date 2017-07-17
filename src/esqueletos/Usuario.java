@@ -2,12 +2,56 @@ package esqueletos;
 
 public class Usuario {
 	private int idusuario,tipo_usuario;
-	private String username;
+	private String username,password,email,nombre,direccion,telefono;
+	private int is_active;
 	
-	public Usuario(int idUsuario,int tipo_usuario,String username){
-		setIdusuario(idUsuario);
-		setTipo_usuario(tipo_usuario);
-		setUsername(username);
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	public int getIs_active() {
+		return is_active;
+	}
+
+	public void setIs_active(int is_active) {
+		this.is_active = is_active;
 	}
 
 	public int getIdusuario() {

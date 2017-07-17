@@ -3,7 +3,7 @@
 <hibernate-mapping>
 	<class name="esqueletos.Usuario" table="usuario">
 		<id name="idusuario" type="int">
-			<column name="ID">
+			<column name="idusuario">
 			</column>
 			<generator class="identity"></generator>
 		</id>
@@ -12,6 +12,24 @@
 		</property>
 		<property name="username" type="java.lang.String">
 			<column name="username"></column>
+		</property>
+		<property name="password" type="java.lang.String">
+			<column name="password"/>
+		</property>
+		<property name="email" type="java.lang.String">
+			<column name="email"/>
+		</property>
+		<property name="nombre" type="java.lang.String">
+			<column name="nombre"/>
+		</property>
+		<property name="direccion" type="java.lang.String">
+			<column name="direccion"/>
+		</property>
+		<property name="telefono" type="java.lang.String">
+			<column name="telefono"/>
+		</property>
+		<property name="is_active" type="int">
+			<column name="is_active"/>
 		</property>
 	</class>
 </hibernate-mapping>

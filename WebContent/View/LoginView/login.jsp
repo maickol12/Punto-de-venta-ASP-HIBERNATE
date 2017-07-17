@@ -8,14 +8,14 @@
 		<h3 class="center-text text-white">Punto de venta</h3>
 	</div>
 	<div class="formulario-login">
-		<form>
+		<form action="LoginController" method="POST">
 			<div class="form-group">
 				<label>Usuario/Correo</label>
-				<input type="text" class="form-control" placeholder="Usuario/Correo...">
+				<input type="text" name="user" class="form-control" placeholder="Usuario/Correo...">
 			</div>
 			<div class="form-group">
 				<label>Contraseña</label>
-				<input type="passoword" class="form-control" placeholder="Contraseña..."/>
+				<input type="password" name="password" class="form-control" placeholder="Contraseña..."/>
 			</div>
 			<center>
 				<button class="btn btn-default cen">Iniciar Session <i class="glyphicon glyphicon-ok"></i></button>

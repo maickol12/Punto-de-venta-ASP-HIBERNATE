@@ -15,12 +15,12 @@ import esqueletos.Usuario;
 import hibernate.HibernateUtil;
 
 @WebServlet("/LoginController")
-public class LoginController extends HttpServlet{
+public class UsuarioController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private SessionFactory factory = null;
 	private Session session = null;
 	
-	public LoginController(){
+	public UsuarioController(){
 		super();
 		factory = HibernateUtil.getSessionFactory();
 		session = factory.openSession();
@@ -29,7 +29,12 @@ public class LoginController extends HttpServlet{
 		response.getWriter().append("GET");
 	}
 	protected void doPost(HttpServletRequest request,HttpServletResponse response) throws IOException{
-		List<Usuario> usuarios = session.createCriteria(Usuario.class).list();
-		response.getWriter().append(" "+usuarios.size());
+		String username = request.getParameter("user");
+		String password = request.getParameter("password");
+		
+		//List<Usuario> usuarios = session.createCriteria(Usuario.class).list();
+		List<Usuario> usuario = session.createQuery("from Usuario WHERE username = '"+username+"' OR email='"+username+"' AND password = '"+password+"'").list();
+		
+		response.getWriter().append(" "+usuario.size());
 	}
 }

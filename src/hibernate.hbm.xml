@@ -11,7 +11,7 @@
         <property name="hibernate.connection.password"></property>
         <property name="connection.pool_size">1</property>
         <!-- Lista de archivos que van a hacer mapeados con la base de datos -->
-        <mapping resource="Model/LoginModel.hbm.xml"/>
+        <mapping resource="Model/UsuarioModel.hbm.xml"/>
     </session-factory>
     
 </hibernate-configuration>
