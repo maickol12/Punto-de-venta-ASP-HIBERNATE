@@ -31,5 +31,7 @@
 		<property name="is_active" type="int">
 			<column name="is_active"/>
 		</property>
+		
+		<one-to-one name="t_u" cascade="all"></one-to-one>
 	</class>
 </hibernate-mapping>

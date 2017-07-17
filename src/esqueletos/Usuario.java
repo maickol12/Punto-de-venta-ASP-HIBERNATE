@@ -4,7 +4,7 @@ public class Usuario {
 	private int idusuario,tipo_usuario;
 	private String username,password,email,nombre,direccion,telefono;
 	private int is_active;
-	
+	private tipo_usuario t_u;
 	
 	public String getPassword() {
 		return password;
@@ -77,5 +77,14 @@ public class Usuario {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
+	public tipo_usuario getT_u() {
+		return t_u;
+	}
+
+	public void setT_u(tipo_usuario t_u) {
+		this.t_u = t_u;
+	}
+	
 	
 }

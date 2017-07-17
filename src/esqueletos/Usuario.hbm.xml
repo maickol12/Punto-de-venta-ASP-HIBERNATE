@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/07/2017 03:10:48 PM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="esqueletos.Usuario" table="USUARIO">
+        <id name="idusuario" type="int">
+            <column name="IDUSUARIO" />
+            <generator class="assigned" />
+        </id>
+        <property name="tipo_usuario" type="int">
+            <column name="TIPO_USUARIO" />
+        </property>
+        <property name="username" type="java.lang.String">
+            <column name="USERNAME" />
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="PASSWORD" />
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="EMAIL" />
+        </property>
+        <property name="nombre" type="java.lang.String">
+            <column name="NOMBRE" />
+        </property>
+        <property name="direccion" type="java.lang.String">
+            <column name="DIRECCION" />
+        </property>
+        <property name="telefono" type="java.lang.String">
+            <column name="TELEFONO" />
+        </property>
+        <property name="is_active" type="int">
+            <column name="IS_ACTIVE" />
+        </property>
+        <many-to-one name="t_u" class="esqueletos.tipo_usuario" fetch="join">
+            <column name="T_U" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>
