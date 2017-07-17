@@ -11,6 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 public class AdminController extends HttpServlet{
 	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws IOException{
 		String opereacion = request.getParameter("operacion");
+		String username = (String) request.getSession().getAttribute("username");
+		
+		if(username == null){
+			response.sendRedirect("index.jsp");
+			return;
+		}
 		if(opereacion == null){
 			response.sendRedirect("View/admin");
 			return;
@@ -18,7 +24,7 @@ public class AdminController extends HttpServlet{
 		switch (opereacion) {
 		case "logout":
 			request.getSession().invalidate();
-			response.sendRedirect("../");
+			response.sendRedirect("index.jsp");
 		break;
 		}
 	}

@@ -31,7 +31,7 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="../../">Salir  <i class="glyphicon glyphicon-log-out"></i></a></li>
+        <li><a href="../../AdminController?operacion=logout">Salir  <i class="glyphicon glyphicon-log-out"></i></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

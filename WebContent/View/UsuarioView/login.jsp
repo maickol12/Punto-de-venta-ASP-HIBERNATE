@@ -34,27 +34,26 @@
 	<% 
 		//OBTENEMOS LA SESSION PARA COMPROBAR SI UN USUARIO ESTA INICIADO SESSION
 		HttpSession ses = request.getSession();
+		
 		//SACAMOS EL NOMBRE DEL USUARIO SI ES QUE EXISTE
-		String username = (String) ses.getAttribute("usuario");
-		//HACEMOS UN TRYCATCH PARA SI NO EXISTE LA SESSION NO TRUENE LA APLICACION
-		try{
-			//SI TODO SALIO BIEN COMPROBAMOS QUE EL NOMVRE NO ESTE VACIO
-			if(!username.isEmpty()){
-				//SACAMOS EL TIPO DE USUARIO PARA DEPENDIENDO EL TIPO TE REDIRECCIONE A TAL PAGINA
-				int tipoUsuario = (Integer) ses.getAttribute("tipo_usuario");
-				//SI EL TIPO ES UNO ENTONCES SIGNIFICA QUE ES ADMINISTRADOR
-				//USAMOS LA FUNCION DE JAVASCRIPT PARA REDIRECCIONAR POR QUE LA DE JSP DIO PROBLEMAS
-				if(tipoUsuario == 1){
+		String username = (String) ses.getAttribute("username");
+		//SI TODO SALIO BIEN COMPROBAMOS QUE EL NOMBRE NO ESTE VACIO
+		if(username != null){
+			System.out.print("si");
+			//SACAMOS EL TIPO DE USUARIO PARA DEPENDIENDO EL TIPO TE REDIRECCIONE A TAL PAGINA
+			int tipoUsuario = (Integer) ses.getAttribute("tipo_usuario");
+			//SI EL TIPO ES UNO ENTONCES SIGNIFICA QUE ES ADMINISTRADOR
+			//USAMOS LA FUNCION DE JAVASCRIPT PARA REDIRECCIONAR POR QUE LA DE JSP DIO PROBLEMAS
+			if(tipoUsuario == 1){
 	%>
 				<script type="text/javascript">
 					document.location = "View/admin"
 				</script>
 	<%	
 				}			
+			}else{
+				System.out.print("No existe");
 			}
-		}catch(Exception e){
-			
-		}
 	%>
 	<div class="background-login">
 		<h3 class="center-text text-white">
