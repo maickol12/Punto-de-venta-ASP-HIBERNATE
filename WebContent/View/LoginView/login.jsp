@@ -1,3 +1,8 @@
+<!-- Hacemos las importaciones de los archivos nesesarios -->
+<%@page import="hibernate.HibernateUtil" %>
+<%
+	HibernateUtil.buildSessionFactory();
+%>
 <div class="col-md-5 col-md-offset-3 col-sm-6 col-sm-offset-3 col-lg-6 col-lg-offset-3 margen_login"d>
 	<div class="background-login">
 		<h3 class="center-text text-white">Punto de venta</h3>
