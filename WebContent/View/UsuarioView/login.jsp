@@ -1,11 +1,12 @@
 <!-- Hacemos las importaciones de los archivos nesesarios -->
+<%@page import="org.apache.jasper.JasperException"%>
 <%@page import="javax.persistence.criteria.CriteriaBuilder.In"%>
 <div class="col-md-5 col-md-offset-3 col-sm-6 col-sm-offset-3 col-lg-6 col-lg-offset-3 margen_login"d>
 	<div class="background-login">
 		<h3 class="center-text text-white">Punto de venta</h3>
 	</div>
 	<div class="formulario-login">
-		<form action="LoginController" method="POST">
+		<form action="UsuarioController" method="POST">
 			<input type="hidden" value="login" name="operacion"/>
 			<div class="form-group">
 				<label>Usuario/Correo</label>
@@ -31,19 +32,28 @@
 		</form>
 	</div>
 	<% 
-		
+		//OBTENEMOS LA SESSION PARA COMPROBAR SI UN USUARIO ESTA INICIADO SESSION
 		HttpSession ses = request.getSession();
+		//SACAMOS EL NOMBRE DEL USUARIO SI ES QUE EXISTE
 		String username = (String) ses.getAttribute("usuario");
-		
-		if(!username.isEmpty()){
-			int tipoUsuario = (Integer) ses.getAttribute("tipo_usuario");
-			if(tipoUsuario == 1){
+		//HACEMOS UN TRYCATCH PARA SI NO EXISTE LA SESSION NO TRUENE LA APLICACION
+		try{
+			//SI TODO SALIO BIEN COMPROBAMOS QUE EL NOMVRE NO ESTE VACIO
+			if(!username.isEmpty()){
+				//SACAMOS EL TIPO DE USUARIO PARA DEPENDIENDO EL TIPO TE REDIRECCIONE A TAL PAGINA
+				int tipoUsuario = (Integer) ses.getAttribute("tipo_usuario");
+				//SI EL TIPO ES UNO ENTONCES SIGNIFICA QUE ES ADMINISTRADOR
+				//USAMOS LA FUNCION DE JAVASCRIPT PARA REDIRECCIONAR POR QUE LA DE JSP DIO PROBLEMAS
+				if(tipoUsuario == 1){
 	%>
 				<script type="text/javascript">
 					document.location = "View/admin"
 				</script>
 	<%	
-			}			
+				}			
+			}
+		}catch(Exception e){
+			
 		}
 	%>
 	<div class="background-login">

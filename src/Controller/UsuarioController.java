@@ -15,7 +15,7 @@ import org.hibernate.SessionFactory;
 import esqueletos.Usuario;
 import hibernate.HibernateUtil;
 
-@WebServlet("/LoginController")
+@WebServlet("/UsuarioController")
 public class UsuarioController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private SessionFactory factory = null;
