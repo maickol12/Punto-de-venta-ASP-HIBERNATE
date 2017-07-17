@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -35,6 +36,17 @@ public class UsuarioController extends HttpServlet{
 		//List<Usuario> usuarios = session.createCriteria(Usuario.class).list();
 		List<Usuario> usuario = session.createQuery("from Usuario WHERE username = '"+username+"' OR email='"+username+"' AND password = '"+password+"'").list();
 		
-		response.getWriter().append(" "+usuario.size());
+		if(!usuario.isEmpty()){
+			HttpSession ses = request.getSession();
+			
+			Usuario user = usuario.get(0);
+			ses.setAttribute("tipo_usuario", user.getTipo_usuario());
+			ses.setAttribute("id_usuario",user.getIdusuario());
+			ses.setAttribute("username", user.getUsername());
+			response.sendRedirect("View/admin");
+		}else{
+			response.sendRedirect("index.jsp?err=true");
+			
+		}
 	}
 }
