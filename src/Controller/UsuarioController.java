@@ -37,6 +37,7 @@ public class UsuarioController extends HttpServlet{
 		response.getWriter().append("GET "+tu.getDescripcion());
 	}
 	protected void doPost(HttpServletRequest request,HttpServletResponse response) throws IOException{
+	
 		String username = request.getParameter("user");
 		String password = request.getParameter("password");
 		

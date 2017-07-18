@@ -7,24 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import generales.metodos_generales;
+
 @WebServlet("/AdminController")
 public class AdminController extends HttpServlet{
+	metodos_generales mg = new metodos_generales();
 	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws IOException{
-		//AQUI OBTENEMOS EL TIPO DE OPERACION QUE SE VA REALIZAR EN ESTE SERVLET
-		String opereacion = request.getParameter("operacion");
-		//AQUI OBTENEMOS EL NOMBRE DE USUARIO DE LA SESSION SI ES QUE EXISTE
-		String username = (String) request.getSession().getAttribute("username");
 		
-		//
-		if(username == null){
-			response.sendRedirect("index.jsp");
+		String operacion = mg.comprobarSession(request, response);
+
+		if(operacion.equals("null")){
 			return;
 		}
-		if(opereacion == null){
-			response.sendRedirect("View/admin");
-			return;
-		}
-		switch (opereacion) {
+		
+		switch (operacion) {
 		case "logout":
 			request.getSession().invalidate();
 			response.sendRedirect("index.jsp");

@@ -1,6 +1,6 @@
 <%@page import="Controller.AdminController"%>
 <div class="col-md-10 col-md-offset-1">
-	<table class="table table-striped">
+	<table class="table table-striped" id="tableSucursales">
 	<tr>
 		<td>Nombre</td>
 		<td>Calle</td>
@@ -12,21 +12,21 @@
 		<td>Pais</td>
 		<td>Codigo postal</td>
 	</tr>
-	<tr>
-	
-	</tr>
 </table>
 </div>
-
+<script type="text/javascript" src="../../js/jquery.js"></script>
 <script>
 	$.ajax({
-		url:'../../adminController',
+		url:'../../SucursalesController',
 		type:'GET',
+		data:{
+			'operacion':'getSucursales'
+		},
 		beforeSend:function(e){
 			
 		},
-		success:function(){
-			
+		success:function(e){
+			$("#tableSucursales").append(e);
 		}
 	});
 </script>
