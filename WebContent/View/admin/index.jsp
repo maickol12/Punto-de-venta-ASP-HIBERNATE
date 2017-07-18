@@ -6,11 +6,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="../../css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+
 </head>
 <body>
 	<jsp:include page="jsp/auth.jsp"></jsp:include>
 	<jsp:include page="html/menu.jsp"></jsp:include>
-	<h1>Maickol admin</h1>
+	<jsp:include page="html/opciones.jsp"></jsp:include>
 </body>
 <script type="text/javascript" src="../../js/jquery.js"></script>
 <script type="text/javascript" src="../../js/bootstrap.min.js"></script>
