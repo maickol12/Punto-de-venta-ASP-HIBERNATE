@@ -1,4 +1,3 @@
-<%@page import="Controller.AdminController"%>
 <div class="col-md-10 col-md-offset-1">
 	<table class="table table-striped" id="tableSucursales">
 	<tr>
@@ -14,6 +13,7 @@
 	</tr>
 </table>
 </div>
+
 <script type="text/javascript" src="../../js/jquery.js"></script>
 <script>
 	$.ajax({
@@ -31,3 +31,5 @@
 		}
 	});
 </script>
+<!-- Modal para agregar sucursales que es llamado desde el menu prinicipal -->  
+<jsp:include page="ModalAgregarSucursal.jsp"/>

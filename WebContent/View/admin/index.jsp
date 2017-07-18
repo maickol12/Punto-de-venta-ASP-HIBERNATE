@@ -20,7 +20,7 @@
 	<%
 		}else if(request.getParameter("opcion").equalsIgnoreCase("sucursales")){
 	%>
-			<jsp:include page="html/SucursalView.jsp"></jsp:include>
+			<jsp:include page="html/sucursal/SucursalView.jsp"></jsp:include>
 	<% 
 		}
 	%>
