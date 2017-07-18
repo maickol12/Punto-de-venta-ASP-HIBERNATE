@@ -20,7 +20,8 @@
 		url:'../../SucursalesController',
 		type:'GET',
 		data:{
-			'operacion':'getSucursales'
+			'operacion':'getSucursales',
+			'start':'0'
 		},
 		beforeSend:function(e){
 			

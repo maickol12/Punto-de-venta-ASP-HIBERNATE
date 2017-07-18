@@ -34,10 +34,10 @@ public class SucursalesController extends HttpServlet{
 		if(opereacion.equals("null")){
 			return;
 		}
-	
+		
 		switch (opereacion) {
 		case "getSucursales":
-			getSucursales(response.getWriter());
+			getSucursales(response.getWriter(),Integer.parseInt(request.getParameter("start")));
 		break;
 
 		default:
@@ -48,7 +48,7 @@ public class SucursalesController extends HttpServlet{
 		
 	}
 	//METODO PARA TRAER TODAS LAS SUCURSALES
-	public void getSucursales(PrintWriter out){
+	public void getSucursales(PrintWriter out,int start){
 		List<sucursal> sucursales = session.createCriteria(sucursal.class).setFirstResult(0).setMaxResults(10).list();
 		System.out.println(""+sucursales.size());
 		for(sucursal suc:sucursales){
