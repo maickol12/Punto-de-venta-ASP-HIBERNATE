@@ -13,6 +13,7 @@
         <!-- Lista de archivos que van a hacer mapeados con la base de datos -->
        	<mapping resource="Model/TipoUsuarioModel.hbm.xml" />
         <mapping resource="Model/UsuarioModel.hbm.xml"/>
+        <mapping resource="Model/clienteModel.hbm.xml"/>
     </session-factory>
     
 </hibernate-configuration>

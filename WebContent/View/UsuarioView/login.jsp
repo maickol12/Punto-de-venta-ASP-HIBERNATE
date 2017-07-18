@@ -22,9 +22,9 @@
 			<%	
 				if(request.getParameter("err")!=null){
 			%>
-				<div class="alert alert-danger alert-dismissible" role="alert">
+				<br><div class="alert alert-danger alert-dismissible" role="alert">
   					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
- 					<strong>Warning!</strong> Better check yourself, you're not looking too good.
+ 					<strong>Cuidado!</strong> Ocurrio un error al intentar ingresar
 				</div>
 			<% 
 				}

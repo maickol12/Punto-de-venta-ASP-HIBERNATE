@@ -8,6 +8,7 @@
 <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+	<jsp:include page="jsp/auth.jsp"></jsp:include>
 	<jsp:include page="html/menu.jsp"></jsp:include>
 	<h1>Maickol admin</h1>
 </body>

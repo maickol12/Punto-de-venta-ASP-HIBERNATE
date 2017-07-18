@@ -28,8 +28,9 @@ public class UsuarioController extends HttpServlet{
 		session = factory.openSession();
 	}
 	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws IOException{
-		Usuario us = session.get(Usuario.class, 2);
+		Usuario us = session.get(Usuario.class, 1);
 		if(us==null){
+			response.getWriter().append("No se encontro nada");
 			return;
 		}
 		tipo_usuario tu = us.getT_u();
