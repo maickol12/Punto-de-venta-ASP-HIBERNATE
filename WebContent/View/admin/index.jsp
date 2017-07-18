@@ -13,7 +13,17 @@
 <body>
 	<jsp:include page="jsp/auth.jsp"></jsp:include>
 	<jsp:include page="html/menu.jsp"></jsp:include>
-	<jsp:include page="html/opciones.jsp"></jsp:include>
+	<%
+		if(request.getParameter("opcion")==null){
+	%>
+			<jsp:include page="html/opciones.jsp"></jsp:include>
+	<%
+		}else if(request.getParameter("opcion").equalsIgnoreCase("sucursales")){
+	%>
+			<jsp:include page="html/SucursalView.jsp"></jsp:include>
+	<% 
+		}
+	%>
 </body>
 <script type="text/javascript" src="../../js/jquery.js"></script>
 <script type="text/javascript" src="../../js/bootstrap.min.js"></script>

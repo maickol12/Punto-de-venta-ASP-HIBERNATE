@@ -47,7 +47,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="index.jsp?opcion=<%= c.nombre %>">
                                 <div class="panel-footer">
                                     <span class="pull-left"><%= c.descripcion %></span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
