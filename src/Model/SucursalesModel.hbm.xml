@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	<class name="esqueletos.sucursal" table="sucursal">
+		<id name="idsucursal">
+			<column name="idsucursal"></column>
+			<generator class="identity"></generator>
+		</id>
+		<property name="nombre_sucursal" type="java.lang.String">
+			<column name="nombre_sucursal"></column>
+		</property>
+		<property name="calle" type="java.lang.String">
+			<column name="calle"></column>
+		</property>
+		<property name="numero" type="int">
+			<column name="numero"></column>
+		</property>
+		<property name="colonia" type="java.lang.String">
+			<column name="colonia"></column>
+		</property>
+		<property name="ciudad" type="java.lang.String">
+			<column name="ciudad"></column>
+		</property>
+		<property name="municipio" type="java.lang.String">
+			<column name="municipio"></column>
+		</property>
+		<property name="estado" type="java.lang.String">
+			<column name="estado"></column>
+		</property>
+		<property name="pais" type="java.lang.String">
+			<column name="pais"></column>
+		</property>
+		<property name="cp" type="java.lang.String">
+			<column name="cp"></column>	
+		</property>
+		<property name="f_alta" type="java.util.Date">
+			<column name="f_alta"></column>	
+		</property>
+		<property name="f_baja" type="java.util.Date">
+			<column name="f_baja"></column>
+		</property>
+		<property name="is_active" type="int">
+			<column name="is_active"></column>
+		</property>
+	</class>
+</hibernate-mapping>
