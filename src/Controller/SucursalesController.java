@@ -16,6 +16,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
 
 import esqueletos.sucursal;
 import generales.metodos_generales;
@@ -104,7 +105,7 @@ public class SucursalesController extends HttpServlet{
 	}
 	//METODO PARA TRAER TODAS LAS SUCURSALES
 	public void getSucursales(PrintWriter out,int start){
-		List<sucursal> sucursales = session.createCriteria(sucursal.class).setFirstResult(0).setMaxResults(10).list();
+		List<sucursal> sucursales = session.createCriteria(sucursal.class).setFirstResult(start).setMaxResults(10).list();
 		out.print("<table class='table table-striped' id='tableSucursales'>");
 		out.print("<tr><td>Nombre</td><td>Calle</td><td>Numero</td><td>Colonia</td><td>Ciudad</td><td>Municipio</td><td>Estado</td><td>Pais</td><td>Codigo postal</td></tr>");
 		for(sucursal suc:sucursales){
@@ -113,9 +114,11 @@ public class SucursalesController extends HttpServlet{
 		out.print("</table>");
 		out.print("<nav aria-label='Page navigation'>");
 		out.print("<ul class='pagination'>");
+		System.out.println("maickol rodriguez "+getCountSucursales());
+		int count = getCountSucursales();
 		int contador = 1;
-		   for(int i = 0;i<10;i++){
-		    	out.print("<li><a href='http://localhost:8080/hibernate/carreras/index.jsp?start="+i+"'>"+contador+"</a></li>");
+		   for(int i = 0;i<count;i+=10){
+		    	out.print("<li><a href='#' onclick='return getSucursales("+i+")'>"+contador+"</a></li>");
 		    	contador++;
 		    }
 		out.print("</li>");
@@ -153,5 +156,9 @@ public class SucursalesController extends HttpServlet{
 			out.print(suc.getCp());
 		out.print("</td>");
 	out.print("</tr>");
+	}
+	//METODO PARA CONTAR TODOS LOS REGISTROS QUE HAY EN LA TABLA DE SUCURSALES
+	public Integer getCountSucursales(){
+		return  ((Long)session.createCriteria(sucursal.class).setProjection(Projections.rowCount()).uniqueResult()).intValue();
 	}
 }

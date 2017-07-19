@@ -7,21 +7,9 @@
 
 <script type="text/javascript" src="../../js/jquery.js"></script>
 <script>
-	$.ajax({
-		url:'../../SucursalesController',
-		type:'GET',
-		data:{
-			'operacion':'getSucursales',
-			'start':'0'
-		},
-		beforeSend:function(e){
-			$("#espera").html("<img src='img/cargando.gif' />");
-		},
-		success:function(e){
-			$("#espera").html("");
-			$("#espera").append(e);
-		}
-	});
+	//METODO QUE SE TRAE LAS SUCURSALES POR PRIMERA VEZ CUANDO SE CARGA LA PAGINA
+	getSucursales(0);
+	
 	function agregarSucursal(){
 		data = {
 			'operacion':'addSucursal',
@@ -59,6 +47,24 @@
 				$("#espera").html(e);
 			}
 			
+		});
+		return null;
+	}
+	function getSucursales(start){
+		$.ajax({
+			url:'../../SucursalesController',
+			type:'GET',
+			data:{
+				'operacion':'getSucursales',
+				'start':start
+			},
+			beforeSend:function(e){
+				$("#espera").html("<img src='img/cargando.gif' />");
+			},
+			success:function(e){
+				$("#espera").html("");
+				$("#espera").append(e);
+			}
 		});
 		return null;
 	}
