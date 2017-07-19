@@ -111,6 +111,16 @@ public class SucursalesController extends HttpServlet{
 			makeCol(out, suc);
 		}
 		out.print("</table>");
+		out.print("<nav aria-label='Page navigation'>");
+		out.print("<ul class='pagination'>");
+		int contador = 1;
+		   for(int i = 0;i<10;i++){
+		    	out.print("<li><a href='http://localhost:8080/hibernate/carreras/index.jsp?start="+i+"'>"+contador+"</a></li>");
+		    	contador++;
+		    }
+		out.print("</li>");
+		out.print("</ul>");
+		out.print("</nav>");
 	}
 	//METODO PARA FORMAR UNA COLUMNA DE UNA TABLA
 	public void makeCol(PrintWriter out,sucursal suc){
