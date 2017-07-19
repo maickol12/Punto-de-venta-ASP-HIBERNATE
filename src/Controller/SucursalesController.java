@@ -105,9 +105,9 @@ public class SucursalesController extends HttpServlet{
 	}
 	//METODO PARA TRAER TODAS LAS SUCURSALES
 	public void getSucursales(PrintWriter out,int start){
-		List<sucursal> sucursales = session.createCriteria(sucursal.class).setFirstResult(start).setMaxResults(10).list();
-		out.print("<table class='table table-striped' id='tableSucursales'>");
-		out.print("<tr><td>Nombre</td><td>Calle</td><td>Numero</td><td>Colonia</td><td>Ciudad</td><td>Municipio</td><td>Estado</td><td>Pais</td><td>Codigo postal</td></tr>");
+		List<sucursal> sucursales = session.createCriteria(sucursal.class).setFirstResult(start).setMaxResults(9).list();
+		out.print("<table class='table table-hover' id='tableSucursales'>");
+		out.print("<tr><td>Nombre</td><td>Calle</td><td>Numero</td><td>Colonia</td><td>Ciudad</td><td>Municipio</td><td>Estado</td><td>Pais</td><td>Codigo postal</td><td>Eliminar</td><td>Editar</td></tr>");
 		for(sucursal suc:sucursales){
 			makeCol(out, suc);
 		}
@@ -154,6 +154,12 @@ public class SucursalesController extends HttpServlet{
 		out.print("</td>");
 		out.print("<td>");
 			out.print(suc.getCp());
+		out.print("</td>");
+		out.print("<td>");
+			out.print("<img width='30px' height='30px' src='img/delete.png'/>");
+		out.print("</td>");
+		out.print("<td>");
+			out.print("<img width='30px' height='30px' src='img/update.png'/>");
 		out.print("</td>");
 	out.print("</tr>");
 	}
