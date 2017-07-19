@@ -59,12 +59,37 @@
 				'start':start
 			},
 			beforeSend:function(e){
-				$("#espera").html("<img src='img/cargando.gif' />");
+				$("#espera").html("<center><img width='200px' height='200px' src='img/cargando.gif' /></center>");
 			},
 			success:function(e){
 				$("#espera").html("");
 				$("#espera").append(e);
 			}
+		});
+		return null;
+	}
+	function eliminar(id){
+		$.ajax({
+			url:'../../SucursalesController?idsucursal='+id+"&operacion=delete",
+			type:'DELETE',
+			beforeSend:function(e){
+				$("#espera").html("<img src='img/cargando.gif' />");
+			},
+			success:function(e){
+				$("#espera").html("");
+				$("#espera").append(e);
+			},
+			error:function(e){
+				$("#espera").html("");
+				$("#espera").append(e);
+			}
+		});
+		return null;
+	}
+	function editar(id){
+		$.ajax({
+			url:'../../SucursalesController',
+			type:'PUT'
 		});
 		return null;
 	}

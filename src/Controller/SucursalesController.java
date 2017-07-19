@@ -64,6 +64,36 @@ public class SucursalesController extends HttpServlet{
 			break;
 		}
 	}
+	protected void doPut(HttpServletRequest request,HttpServletResponse response){
+		
+	}
+	protected void doDelete(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		mg.comprobarSession(request, response);
+		System.out.println("mac");
+		eliminarSucursal(request,response.getWriter());
+	}
+	public void eliminarSucursal(HttpServletRequest request,PrintWriter out){
+		int id = Integer.parseInt(request.getParameter("idsucursal"));
+		System.out.println("maickol "+id);
+		Transaction tx = null;
+		try{
+			tx = session.getTransaction();
+			tx.begin();
+			
+			sucursal suc = (sucursal) session.get(sucursal.class, id);
+			
+			suc.setIs_active(0);
+			
+			session.update(suc);
+			
+			getSucursales(out, 0);
+			
+			tx.commit();
+		}catch(Exception e){
+			tx.rollback();
+			System.out.println(e);
+		}
+	}
 	private void insertarSucursal(HttpServletRequest request,PrintWriter out){
 		sucursal suc = new sucursal();
 		suc.setNombre_sucursal(request.getParameter("nombre"));
@@ -156,10 +186,10 @@ public class SucursalesController extends HttpServlet{
 			out.print(suc.getCp());
 		out.print("</td>");
 		out.print("<td>");
-			out.print("<img width='30px' height='30px' src='img/delete.png'/>");
+			out.print("<a href='#' onclick='return eliminar("+suc.getIdsucursal()+")'><img width='30px' height='30px' src='img/delete.png'/></a>");
 		out.print("</td>");
 		out.print("<td>");
-			out.print("<img width='30px' height='30px' src='img/update.png'/>");
+			out.print("<a href='#' onclick='return editar("+suc.getIdsucursal()+")'><img width='30px' height='30px' src='img/update.png'/></a>");
 		out.print("</td>");
 	out.print("</tr>");
 	}
