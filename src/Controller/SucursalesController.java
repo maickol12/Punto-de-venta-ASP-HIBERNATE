@@ -18,6 +18,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
+
 import esqueletos.sucursal;
 import generales.metodos_generales;
 import hibernate.HibernateUtil;
@@ -59,22 +61,64 @@ public class SucursalesController extends HttpServlet{
 		case "addSucursal":
 			insertarSucursal(request,response.getWriter());
 		break;
+		case "editarSucursal":
+			editarSucursal(request, response);
+		break;
 
 		default:
 			break;
 		}
 	}
-	protected void doPut(HttpServletRequest request,HttpServletResponse response){
+	
+	public void editarSucursal(HttpServletRequest request,HttpServletResponse response){
+		String nombre = request.getParameter("nombre");
+		String calle = request.getParameter("calle");
+		String ciudad = request.getParameter("ciudad");
+		String numero = request.getParameter("numero");
+		String cp = request.getParameter("codigo_postal");
+		String colonia = request.getParameter("colonia");
+		String municipio = request.getParameter("municipio");
+		String estado = request.getParameter("estado");
+		String pais = request.getParameter("pais");
+		int id = Integer.parseInt(request.getParameter("idsucursal"));
 		
+		
+		Transaction tx = null;
+		try{
+			tx = session.getTransaction();
+			tx.begin();
+			
+			sucursal suc = session.get(sucursal.class, id);
+			
+			
+			suc.setNombre_sucursal(nombre);
+			suc.setCalle(calle);
+			suc.setCiudad(ciudad);
+			suc.setNumero(12);
+			suc.setCp(cp);
+			suc.setColonia(colonia);
+			suc.setMunicipio(municipio);
+			suc.setEstado(estado);
+			suc.setPais(pais);
+			
+			session.update(suc);
+			
+			getSucursales(response.getWriter(), 0);
+			
+			tx.commit();
+			
+		}catch(Exception e){
+			tx.rollback();
+			System.out.println("fdfjk "+e.getMessage());
+		}
 	}
+	
 	protected void doDelete(HttpServletRequest request,HttpServletResponse response) throws IOException{
 		mg.comprobarSession(request, response);
-		System.out.println("mac");
 		eliminarSucursal(request,response.getWriter());
 	}
 	public void eliminarSucursal(HttpServletRequest request,PrintWriter out){
 		int id = Integer.parseInt(request.getParameter("idsucursal"));
-		System.out.println("maickol "+id);
 		Transaction tx = null;
 		try{
 			tx = session.getTransaction();
@@ -144,7 +188,6 @@ public class SucursalesController extends HttpServlet{
 		out.print("</table>");
 		out.print("<nav aria-label='Page navigation'>");
 		out.print("<ul class='pagination'>");
-		System.out.println("maickol rodriguez "+getCountSucursales());
 		int count = getCountSucursales();
 		int contador = 1;
 		   for(int i = 0;i<count;i+=10){

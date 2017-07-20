@@ -35,8 +35,6 @@
 			success:function(e){
 				if(e!="null"){
 					$("#espera").html(e);
-					$("#espera").html("");
-					$("#espera").append(e);
 				}else{
 					alert(e);
 					$("#espera").html(e);
@@ -62,8 +60,7 @@
 				$("#espera").html("<center><img width='200px' height='200px' src='img/cargando.gif' /></center>");
 			},
 			success:function(e){
-				$("#espera").html("");
-				$("#espera").append(e);
+				$("#espera").html(e);
 			}
 		});
 		return null;
@@ -77,12 +74,10 @@
 					$("#espera").html("<img src='img/cargando.gif' />");
 				},
 				success:function(e){
-					$("#espera").html("");
-					$("#espera").append(e);
+					$("#espera").html(e);
 				},
 				error:function(e){
-					$("#espera").html("");
-					$("#espera").append(e);
+					$("#espera").html(e);
 				}
 			});
 		}
@@ -99,12 +94,14 @@
 		$("#estado"+id).html('<input class="form-control" size="6" id="estadoi'+id+'" type="text" placeholder="Estado..." value="'+$("#estado"+id).text()+'" />');
 		$("#pais"+id).html('<input class="form-control" size="6" id="paisi'+id+'" type="text" placeholder="Pais..." value="'+$("#pais"+id).text()+'" />');
 		$("#cp"+id).html('<input class="form-control" size="6" id="cpi'+id+'" type="text" placeholder="Cp..." value="'+$("#cp"+id).text()+'" />');
-		$("#editar"+id).html('<button class="btn btn-primary" onclick="return editar_btn('+id+')">Editar</button>');
+		$("#editar"+id).html('<button class="btn btn-primary" onclick="return editar_btn('+id+');">Editar</button>');
 		return null;
 	}
 	function editar_btn(id){
+		id = ""+id;
 		data = {
-				'operacion':'editSucursal',
+				idsucursal:id,
+				'operacion':'editarSucursal',
 				'nombre':$("#nombrei"+id).val(),
 				'calle':$("#callei"+id).val(),
 				'ciudad':$("#ciudadi"+id).val(),
@@ -115,12 +112,11 @@
 				'estado':$("#estadoi"+id).val(),
 				'pais':$("#paisi"+id).val()
 			}
-		console.log(data);
-		if(confirm('Esta seguro que desea relizar la edicio?')){
-			$.ajax({
-				url:'../../SucursalesController',
-				type:'PUT',
-				
+		if(confirm('Esta seguro que desea relizar la edicion?')){
+			console.log(data);
+			
+			$.post("../../SucursalesController",data,function(e){
+				$("#espera").html(e);
 			});
 		}
 		return null;
