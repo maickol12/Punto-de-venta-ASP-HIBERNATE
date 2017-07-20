@@ -17,6 +17,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 
@@ -179,7 +180,11 @@ public class SucursalesController extends HttpServlet{
 	}
 	//METODO PARA TRAER TODAS LAS SUCURSALES
 	public void getSucursales(PrintWriter out,int start){
-		List<sucursal> sucursales = session.createCriteria(sucursal.class).setFirstResult(start).setMaxResults(9).list();
+		List<sucursal> sucursales = session.createCriteria(sucursal.class).
+				add(Restrictions.eq("is_active", new Integer(1))).
+				setFirstResult(start).
+				setMaxResults(9).
+				list();
 		out.print("<table class='table table-hover' id='tableSucursales'>");
 		out.print("<tr><td>Nombre</td><td>Calle</td><td>Numero</td><td>Colonia</td><td>Ciudad</td><td>Municipio</td><td>Estado</td><td>Pais</td><td>Codigo postal</td><td>Eliminar</td><td>Editar</td></tr>");
 		for(sucursal suc:sucursales){
@@ -238,6 +243,6 @@ public class SucursalesController extends HttpServlet{
 	}
 	//METODO PARA CONTAR TODOS LOS REGISTROS QUE HAY EN LA TABLA DE SUCURSALES
 	public Integer getCountSucursales(){
-		return  ((Long)session.createCriteria(sucursal.class).setProjection(Projections.rowCount()).uniqueResult()).intValue();
+		return  ((Long)session.createCriteria(sucursal.class).setProjection(Projections.rowCount()).add(Restrictions.eq("is_active",new Integer(1))).uniqueResult()).intValue();
 	}
 }
