@@ -23,7 +23,11 @@
           </ul>
         </li>
       </ul>
-
+	 <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" id="<%= request.getParameter("opcion") %>" class="form-control" placeholder="Buscar <%= request.getParameter("opcion") %>">
+        </div>
+      </form>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="../../AdminController?operacion=logout">Salir  <i class="glyphicon glyphicon-log-out"></i></a></li>
       </ul>

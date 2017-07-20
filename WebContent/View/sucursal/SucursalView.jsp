@@ -128,6 +128,10 @@
 			return false;
 		}
 	}
+	
+	$("#<%= request.getParameter("opcion") %>").keyup(function(e){
+		console.log("mac");
+	});
 </script>
 
 

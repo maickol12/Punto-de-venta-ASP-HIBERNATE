@@ -1,6 +1,17 @@
+body{
+	background-image: url("../img/background.jpg");
+	background-size:     cover;                      /* <------ */
+    background-repeat:   no-repeat;
+    background-position: center center;              /* optional, center the image */
+}
 .margen_login{
 	margin-top:5%;
 }
+.margenes{
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
 .color_login{
 	 border-left: 6px solid #286090;
     background-color: lightgrey;

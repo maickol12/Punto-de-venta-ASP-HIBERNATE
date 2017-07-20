@@ -40,7 +40,7 @@
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                       <img src="img/<%= c.img %>.png">
+                                       <img src="../../img/<%= c.img %>.png">
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <h3><%= c.nombre %></h3>

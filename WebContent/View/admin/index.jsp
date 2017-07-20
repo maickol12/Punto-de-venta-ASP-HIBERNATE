@@ -7,20 +7,20 @@
 <title>Administrador</title>
 <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="../../css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="../../css/style.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body>
-	<jsp:include page="jsp/auth.jsp"></jsp:include>
-	<jsp:include page="html/menu.jsp"></jsp:include>
+	<jsp:include page="../../jsp/auth.jsp"></jsp:include>
+	<jsp:include page="../menu.jsp"></jsp:include>
 	<%
 		if(request.getParameter("opcion")==null){
 	%>
-			<jsp:include page="html/opciones.jsp"></jsp:include>
+			<jsp:include page="../opciones.jsp"></jsp:include>
 	<%
 		}else if(request.getParameter("opcion").equalsIgnoreCase("sucursales")){
 	%>
-			<jsp:include page="html/sucursal/SucursalView.jsp"></jsp:include>
+			<jsp:include page="../sucursal/SucursalView.jsp"></jsp:include>
 	<% 
 		}
 	%>
