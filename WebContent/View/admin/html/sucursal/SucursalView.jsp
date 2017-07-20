@@ -69,29 +69,68 @@
 		return null;
 	}
 	function eliminar(id){
-		$.ajax({
-			url:'../../SucursalesController?idsucursal='+id+"&operacion=delete",
-			type:'DELETE',
-			beforeSend:function(e){
-				$("#espera").html("<img src='img/cargando.gif' />");
-			},
-			success:function(e){
-				$("#espera").html("");
-				$("#espera").append(e);
-			},
-			error:function(e){
-				$("#espera").html("");
-				$("#espera").append(e);
-			}
-		});
+		if(confirmacion("Esta seguro que desea realizar la eliminacion?")){
+			$.ajax({
+				url:'../../SucursalesController?idsucursal='+id+"&operacion=delete",
+				type:'DELETE',
+				beforeSend:function(e){
+					$("#espera").html("<img src='img/cargando.gif' />");
+				},
+				success:function(e){
+					$("#espera").html("");
+					$("#espera").append(e);
+				},
+				error:function(e){
+					$("#espera").html("");
+					$("#espera").append(e);
+				}
+			});
+		}
+		
 		return null;
 	}
 	function editar(id){
-		$.ajax({
-			url:'../../SucursalesController',
-			type:'PUT'
-		});
+		$("#nombre"+id).html('<input class="form-control" id="nombrei'+id+'" size="6" type="text" placeholder="Nombre..." value="'+$("#nombre"+id).text()+'" />');
+		$("#calle"+id).html('<input class="form-control" id="callei'+id+'" size="6" type="text" placeholder="Calle..." value="'+$("#calle"+id).text()+'" />');
+		$("#numero"+id).html('<input class="form-control" id="numero'+id+'" size="6" type="text" placeholder="Numero..." value="'+$("#numero"+id).text()+'" />');
+		$("#colonia"+id).html('<input class="form-control" id="colonia'+id+'" size="6" type="text" placeholder="Colonia..." value="'+$("#colonia"+id).text()+'" />');
+		$("#ciudad"+id).html('<input class="form-control" size="6" type="text" placeholder="Ciudad..." value="'+$("#ciudad"+id).text()+'" />');
+		$("#municipio"+id).html('<input class="form-control" size="6" type="text" placeholder="Municipio..." value="'+$("#municipio"+id).text()+'" />');
+		$("#estado"+id).html('<input class="form-control" size="6" type="text" placeholder="Estado..." value="'+$("#estado"+id).text()+'" />');
+		$("#pais"+id).html('<input class="form-control" size="6" type="text" placeholder="Pais..." value="'+$("#pais"+id).text()+'" />');
+		$("#cp"+id).html('<input class="form-control" size="6" type="text" placeholder="Cp..." value="'+$("#cp"+id).text()+'" />');
+		$("#editar"+id).html('<button class="btn btn-primary" onclick="return editar_btn('+id+')">Editar</button>');
 		return null;
+	}
+	function editar_btn(id){
+		data = {
+				'operacion':'editSucursal',
+				'nombre':$("#nombrei"+id).val(),
+				'calle':$("#callei"+id).val(),
+				'ciudad':$("#ciudadi"+id).val(),
+				'numero':$("#numeroi"+id).val(),
+				'codigo_postal':$("#cpi"+id).val(),
+				'colonia':$("#coloniai"+id).val(),
+				'municipio':$("#municipioi"+id).val(),
+				'estado':$("#estadoi"+id).val(),
+				'pais':$("#paisi"+id).val()
+			}
+		console.log(data);
+		if(confirm('Esta seguro que desea relizar la edicio?')){
+			$.ajax({
+				url:'../../SucursalesController',
+				type:'PUT',
+				
+			});
+		}
+		return null;
+	}
+	function confirmacion(messaje){
+		if(confirm(messaje)){
+			return true;	
+		}else{
+			return false;
+		}
 	}
 </script>
 
