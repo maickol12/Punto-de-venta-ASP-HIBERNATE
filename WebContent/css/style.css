@@ -1,8 +1,6 @@
-body{
-	background-image: url("../img/background.jpg");
-	background-size:     cover;                      /* <------ */
-    background-repeat:   no-repeat;
-    background-position: center center;              /* optional, center the image */
+.ancho{
+	width: 80%;	
+	margin: 0 auto;
 }
 .margen_login{
 	margin-top:5%;
@@ -18,9 +16,6 @@ body{
 }
 .margen_login{
 	padding-top: 80px;
-}
-body{
-	background-color:#374046 !important;
 }
 .background-login{
 	background: #356AA0;

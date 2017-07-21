@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import generales.metodos_generales;
 
 @WebServlet("/AdminController")
+
+
 public class AdminController extends HttpServlet{
 	metodos_generales mg = new metodos_generales();
 	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws IOException{

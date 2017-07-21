@@ -1,5 +1,5 @@
 <div class="col-md-10 col-md-offset-1">
-	<div id="espera">
+	<div id="espera" class="">
 		
 	</div>
 </table>
@@ -21,15 +21,16 @@
 			'colonia':$("#colonia").val(),
 			'municipio':$("#municipio").val(),
 			'estado':$("#estado").val(),
-			'pais':$("#pais").val()
+			'pais':$("#pais").val(),
 		}
+		console.log(data);
 		$.ajax({
 			url:'../../SucursalesController',
 			type:'POST',
 			data:data,
 			beforeSend:function(e){
 				$('#Sucursales').modal('toggle');
-				$("#espera").html("<img src='img/cargando.gif' />");
+				$("#espera").html("<img src='../../img/cargando.gif' />");
 				
 			},
 			success:function(e){
@@ -57,7 +58,7 @@
 				'start':start
 			},
 			beforeSend:function(e){
-				$("#espera").html("<center><img width='200px' height='200px' src='img/cargando.gif' /></center>");
+				$("#espera").html("<center><img width='200px' height='200px' src='../../img/cargando.gif' /></center>");
 			},
 			success:function(e){
 				$("#espera").html(e);
@@ -71,7 +72,7 @@
 				url:'../../SucursalesController?idsucursal='+id+"&operacion=delete",
 				type:'DELETE',
 				beforeSend:function(e){
-					$("#espera").html("<img src='img/cargando.gif' />");
+					$("#espera").html("<img src='../../img/cargando.gif' />");
 				},
 				success:function(e){
 					$("#espera").html(e);
@@ -129,9 +130,22 @@
 		}
 	}
 	
-	$("#<%= request.getParameter("opcion") %>").keyup(function(e){
-		console.log("mac");
+	$("#buscar<%= request.getParameter("opcion") %>").keyup(function(e){
+		$.ajax({
+			url:'../../SucursalesController',
+			type:'GET',
+			data:{
+				'operacion':'findSucursales',
+				'value':$("#buscar<%= request.getParameter("opcion") %>").val()
+			},
+			beforeSend:function(e){
+			},
+			success:function(e){
+				$("#espera").html(e);
+			}
+		});
 	});
+	
 </script>
 
 

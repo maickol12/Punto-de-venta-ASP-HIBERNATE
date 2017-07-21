@@ -47,7 +47,9 @@ public class SucursalesController extends HttpServlet{
 		case "getSucursales":
 			getSucursales(response.getWriter(),Integer.parseInt(request.getParameter("start")));
 		break;
-
+		case "findSucursales":
+			findSucursal(request.getParameter("value"),response.getWriter());
+		break;
 		default:
 			break;
 		}
@@ -139,7 +141,33 @@ public class SucursalesController extends HttpServlet{
 			System.out.println(e);
 		}
 	}
+	public void findSucursal(String value,PrintWriter out){
+		List<sucursal> sucursales = session.createCriteria(sucursal.class).
+				add(Restrictions.eq("is_active", new Integer(1))).
+				add(Restrictions.like("nombre_sucursal","%"+value+"%")).
+				setMaxResults(9).
+				list();
+		out.print("<table style='padding:10px;' class='table table-hover table-inverse' id='tableSucursales'>");
+		out.print("<tr><td>Nombre</td><td>Calle</td><td>Numero</td><td>Colonia</td><td>Ciudad</td><td>Municipio</td><td>Estado</td><td>Pais</td><td>Codigo postal</td><td>Eliminar</td><td>Editar</td></tr>");
+		for(sucursal suc:sucursales){
+			makeCol(out, suc);
+		}
+		out.print("</table>");
+		out.print("<nav aria-label='Page navigation'>");
+		out.print("<ul class='pagination'>");
+		int count = getCountSucursales();
+		int contador = 1;
+		   for(int i = 0;i<count;i+=10){
+		    	out.print("<li><a href='#' onclick='return getSucursales("+i+")'>"+contador+"</a></li>");
+		    	contador++;
+		    }
+		out.print("</li>");
+		out.print("</ul>");
+		out.print("</nav>");
+		out.println("</table>");
+	}
 	private void insertarSucursal(HttpServletRequest request,PrintWriter out){
+		
 		sucursal suc = new sucursal();
 		suc.setNombre_sucursal(request.getParameter("nombre"));
 		suc.setCalle(request.getParameter("calle"));
@@ -150,6 +178,7 @@ public class SucursalesController extends HttpServlet{
 		suc.setMunicipio(request.getParameter("municipio"));
 		suc.setEstado(request.getParameter("estado"));
 		suc.setPais(request.getParameter("pais"));
+		suc.setIs_active(1);
 		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
@@ -185,7 +214,7 @@ public class SucursalesController extends HttpServlet{
 				setFirstResult(start).
 				setMaxResults(9).
 				list();
-		out.print("<table class='table table-hover' id='tableSucursales'>");
+		out.print("<table style='padding:10px;' class='table table-hover table-inverse' id='tableSucursales'>");
 		out.print("<tr><td>Nombre</td><td>Calle</td><td>Numero</td><td>Colonia</td><td>Ciudad</td><td>Municipio</td><td>Estado</td><td>Pais</td><td>Codigo postal</td><td>Eliminar</td><td>Editar</td></tr>");
 		for(sucursal suc:sucursales){
 			makeCol(out, suc);
@@ -202,6 +231,7 @@ public class SucursalesController extends HttpServlet{
 		out.print("</li>");
 		out.print("</ul>");
 		out.print("</nav>");
+		out.println("</table>");
 	}
 	//METODO PARA FORMAR UNA COLUMNA DE UNA TABLA
 	public void makeCol(PrintWriter out,sucursal suc){
@@ -234,10 +264,10 @@ public class SucursalesController extends HttpServlet{
 			out.print(suc.getCp());
 		out.print("</td>");
 		out.print("<td id='eliminar"+suc.getIdsucursal()+"'>");
-			out.print("<a href='#' onclick='return eliminar("+suc.getIdsucursal()+")'><img width='30px' height='30px' src='img/delete.png'/></a>");
+			out.print("<a href='#' onclick='return eliminar("+suc.getIdsucursal()+")'><img width='30px' height='30px' src='../../img/delete.png'/></a>");
 		out.print("</td>");
 		out.print("<td id='editar"+suc.getIdsucursal()+"'>");
-			out.print("<a href='#' onclick='return editar("+suc.getIdsucursal()+")'><img width='30px' height='30px' src='img/update.png'/></a>");
+			out.print("<a href='#' onclick='return editar("+suc.getIdsucursal()+")'><img width='30px' height='30px' src='../../img/update.png'/></a>");
 		out.print("</td>");
 	out.print("</tr>");
 	}
