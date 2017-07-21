@@ -104,7 +104,38 @@
 			
 	}
 	function editar_btn(id){
-		
+			id = ""+id;
+			data = {
+					'idcliente':id,
+					'operacion':'editarCliente',
+					'razonsocial':$("#razonsociali"+id).val(),
+					'rfc':$("#rfci"+id).val(),
+					'calle':$("#callei"+id).val(),
+					'numero':$("#numeroi"+id).val(),
+					'cp':$("#cpi"+id).val(),
+					'ciudad':$("#ciudadi"+id).val(),
+					'municipio':$("#municipioi"+id).val(),
+					'estado':$("#estadoi"+id).val(),
+					'pais':$("#paisi"+id).val(),
+					'correo':$("#correoi"+id).val(),
+					'telefono':$("#telefonoi"+id).val()
+				}
+			if(confirm('Esta seguro que desea relizar la edicion?')){
+				console.log(data);
+				
+				$.ajax({
+					url:'../../ClienteController',
+					type:'POST',
+					data:data,
+					beforeSend:function(e){
+						$("#espera").html("<img src='../../img/cargando.gif' />");
+					},
+					success:function(e){
+						$("#espera").html(e);
+					}
+				});
+			}
+			return null;
 	}
 	function confirmacion(messaje){
 		if(confirm(messaje)){

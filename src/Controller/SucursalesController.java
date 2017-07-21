@@ -97,7 +97,7 @@ public class SucursalesController extends HttpServlet{
 			suc.setNombre_sucursal(nombre);
 			suc.setCalle(calle);
 			suc.setCiudad(ciudad);
-			suc.setNumero(12);
+			suc.setNumero(Integer.parseInt(numero));
 			suc.setCp(cp);
 			suc.setColonia(colonia);
 			suc.setMunicipio(municipio);

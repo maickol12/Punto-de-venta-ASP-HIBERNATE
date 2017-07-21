@@ -59,8 +59,56 @@ public class ClienteController extends HttpServlet{
 		case "delete":
 			deleteCliente(Integer.parseInt(request.getParameter("id")),response.getWriter());
 		break;
+		case "editarCliente":
+			editarCliente(request, response);
+		break;
 		default:
 			break;
+		}
+	}
+	public void editarCliente(HttpServletRequest request,HttpServletResponse response){
+		String razonsocial = request.getParameter("razonsocial");
+		String rfc = request.getParameter("rfc");
+		String calle = request.getParameter("calle");
+		String numero = request.getParameter("numero");
+		String cp = request.getParameter("cp");
+		String ciudad = request.getParameter("ciudad");
+		String municipio = request.getParameter("municipio");
+		String estado = request.getParameter("estado");
+		String pais = request.getParameter("pais");
+		String correo = request.getParameter("correo");
+		String telefono = request.getParameter("telefono");
+		int id = Integer.parseInt(request.getParameter("idcliente"));
+		
+		
+		Transaction tx = null;
+		try{
+			tx = session.getTransaction();
+			tx.begin();
+			
+			cliente cli = session.get(cliente.class, id);
+			
+			
+			cli.setRazon_social(razonsocial);
+			cli.setRfc(rfc);
+			cli.setCiudad(ciudad);
+			cli.setNumero(Integer.parseInt(numero));
+			cli.setCp(cp);
+			cli.setMunicipio(municipio);
+			cli.setEstado(estado);
+			cli.setPais(pais);
+			cli.setCiudad(ciudad);
+			cli.setEmail(correo);
+			cli.setTelefono(telefono);
+			session.update(cli);
+			
+			getClientes(response.getWriter(), 0);
+			
+			tx.commit();
+			
+		}catch(Exception e){
+			tx.rollback();
+			System.out.println("fdfjk "+e.getMessage());
 		}
 	}
 	public void deleteCliente(int id,PrintWriter out){
