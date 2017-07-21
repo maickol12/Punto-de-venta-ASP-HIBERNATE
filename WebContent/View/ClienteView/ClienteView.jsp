@@ -70,7 +70,12 @@
 		});
 		return null;
 	}
-
+	function editar(id){
+		alert(id);
+	}
+	function eliminar(id){
+		alert(id);
+	}
 </script>
 <!-- INCLUYENDO EL MODAL PARA AGREGAR CLIENTES -->
 <jsp:include page="ModalAgregarCliente.jsp" />
