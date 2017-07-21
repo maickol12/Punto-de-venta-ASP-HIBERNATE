@@ -2,6 +2,9 @@ package Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
@@ -46,7 +50,66 @@ public class ClienteController extends HttpServlet{
 		
 		
 	}
+	protected void doPost(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		String operacion = gn.comprobarSession(request, response);
+		
+		switch (operacion) {
+		case "addCliente":
+			insertarSucursal(request, response.getWriter());
+		break;
+
+		default:
+			break;
+		}
+	}
 	
+	private void insertarSucursal(HttpServletRequest request,PrintWriter out){
+		
+		cliente cli = new cliente();
+		
+		cli.setRazon_social(request.getParameter("razonsocial"));
+		cli.setRfc(request.getParameter("rfc"));
+		cli.setCalle(request.getParameter("calle"));
+		cli.setNumero(Integer.parseInt(request.getParameter("numero")));
+		cli.setCiudad(request.getParameter("ciudad"));
+		cli.setNumero(Integer.parseInt(request.getParameter("numero")));
+		cli.setCp(request.getParameter("cp"));
+		cli.setMunicipio(request.getParameter("municipio"));
+		cli.setEstado(request.getParameter("estado"));
+		cli.setPais(request.getParameter("pais"));
+		cli.setTelefono(request.getParameter("telefono"));
+		cli.setEmail(request.getParameter("correo"));
+		
+		cli.setIs_active(1);
+		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		cli.setF_alta(date);
+		cli.setF_baja(date);
+		
+		Transaction tx = null;
+		
+		try{
+			tx = session.getTransaction();
+			tx.begin();
+			session.save(cli);
+			tx.commit();
+			
+			if(session==null){
+				out.println("null");
+			}else{
+				getClientes(out, 0);
+			}
+		}catch(Exception e){
+			tx.rollback();
+			System.out.println(e);
+		}
+		
+		
+		
+		
+	}
+
 	private void getClientes(PrintWriter out,int start){
 		List<cliente> clientes = session.createCriteria(cliente.class).
 				add(Restrictions.eq("is_active", new Integer(1))).
@@ -120,9 +183,7 @@ public class ClienteController extends HttpServlet{
 	public Integer getCountClientes(){
 		return ((Long)session.createCriteria(cliente.class).setProjection(Projections.rowCount()).add(Restrictions.eqOrIsNull("is_active", new Integer(1))).uniqueResult()).intValue();
 	}
-	protected void doPost(HttpServletRequest request,HttpServletResponse response){
-		
-	}
+	
 
 	
 }
