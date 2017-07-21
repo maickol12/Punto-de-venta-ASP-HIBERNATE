@@ -144,6 +144,40 @@
 			return false;
 		}
 	}
+	
+	$("#buscar<%= request.getParameter("opcion")%>").keyup(function(e){
+		$.ajax({
+			url:'../../ClienteController',
+			type:'GET',
+			data:{
+				'operacion':'find',
+				'data':$("#buscar<%= request.getParameter("opcion") %>").val()
+			},
+			beforeSend:function(e){
+				$("#espera").html("<img src='../../img/cargando.gif' />");		
+			},
+			success:function(e){
+				$("#espera").html(e);
+			}
+		});
+	});
+	
+	function getClientes(start){
+		$.ajax({
+			url:'../../ClienteController',
+			type:'GET',
+			data:{
+				'operacion':'getClientes',
+				'start':start
+			},
+			beforeSend:function(e){
+				$("#espera").html("<center><img width='200px' height='200px' src='../../img/cargando.gif' /></center>");
+			},
+			success:function(e){
+				$("#espera").html(e);
+			}
+		});
+	}
 </script>
 <!-- INCLUYENDO EL MODAL PARA AGREGAR CLIENTES -->
 <jsp:include page="ModalAgregarCliente.jsp" />

@@ -43,6 +43,9 @@ public class ClienteController extends HttpServlet{
 		case "getClientes":
 			getClientes(response.getWriter(),Integer.parseInt(request.getParameter("start")));
 		break;
+		case "find":
+			findCliente(request.getParameter("data"),response.getWriter());
+		break;
 		default:
 			break;
 		}
@@ -184,7 +187,32 @@ public class ClienteController extends HttpServlet{
 		
 		
 	}
-
+	private void findCliente(String data,PrintWriter out){
+		List<cliente> clientes = session.createCriteria(cliente.class).
+				add(Restrictions.like("razon_social", "%"+data+"%")).
+				setMaxResults(9).
+				list();
+		
+		out.print("<table style='padding:10px;' class='table table-hover table-inverse' id='tableSucursales'>");
+		out.print("<tr><td>Razon social</td><td>Rfc</td><td>Calle</td><td>Numero</td><td>Ciudad</td><td>Municipio</td><td>Estado</td><td>Pais</td><td>Codigo postal</td><td>Correo</td><td>Telefono</td><td>Eliminar</td><td>Editar</td></tr>");
+		for(cliente cli:clientes){
+			makeCol(out, cli);
+		}
+		out.print("</table>");
+		out.print("<nav aria-label='Page navigation'>");
+		out.print("<ul class='pagination'>");
+		int count = getCountClientes();
+		int contador = 1;
+		   for(int i = 0;i<count;i+=10){
+		    	out.print("<li><a href='#' onclick='return getClientes("+i+")'>"+contador+"</a></li>");
+		    	contador++;
+		    }
+		out.print("</li>");
+		out.print("</ul>");
+		out.print("</nav>");
+		out.println("</table>");
+		
+	}
 	private void getClientes(PrintWriter out,int start){
 		List<cliente> clientes = session.createCriteria(cliente.class).
 				add(Restrictions.eq("is_active", new Integer(1))).
@@ -202,7 +230,7 @@ public class ClienteController extends HttpServlet{
 		int count = getCountClientes();
 		int contador = 1;
 		   for(int i = 0;i<count;i+=10){
-		    	out.print("<li><a href='#' onclick='return getSucursales("+i+")'>"+contador+"</a></li>");
+		    	out.print("<li><a href='#' onclick='return getClientes("+i+")'>"+contador+"</a></li>");
 		    	contador++;
 		    }
 		out.print("</li>");
