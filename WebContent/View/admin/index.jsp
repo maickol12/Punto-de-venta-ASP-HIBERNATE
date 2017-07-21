@@ -22,6 +22,10 @@
 	%>
 			<jsp:include page="../sucursal/SucursalView.jsp"></jsp:include>
 	<% 
+		}else if(request.getParameter("opcion").equalsIgnoreCase("clientes")){
+	%>
+			<jsp:include page="../ClienteView/ClienteView.jsp"></jsp:include>
+	<%
 		}
 	%>
 </body>

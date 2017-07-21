@@ -28,7 +28,16 @@
       </ul>
       <form class="navbar-form navbar-left">
         <div class="form-group">
-          <input type="text" id="buscar<%= request.getParameter("opcion") %>" class="form-control" placeholder="Buscar <%= request.getParameter("opcion").toLowerCase() %>">
+        	<%
+        		String cad = "";
+	    		try{
+	    			cad = request.getParameter("opcion");
+	    		}catch(Exception e){
+	    			cad = "";
+	    		}
+	    		
+        	%>
+          <input type="text" id="buscar<%= cad %>" class="form-control" placeholder="Buscar <%= cad %>">
         </div>
       </form>
     </div><!-- /.navbar-collapse -->
