@@ -10,12 +10,12 @@
 <script type="text/javascript" src="../../js/jquery.js"></script>
 <script>
 	
-	
+	getAllClients(0);
 	
 	function getAllClients(start){
 		$.ajax({
 			url:'../../ClienteController',
-			type:'POST',
+			type:'GET',
 			data:{
 				'operacion':'getClientes',
 				'start':start
@@ -30,3 +30,5 @@
 	}
 
 </script>
+<!-- INCLUYENDO EL MODAL PARA AGREGAR CLIENTES -->
+<jsp:include page="ModalAgregarCliente.jsp" />

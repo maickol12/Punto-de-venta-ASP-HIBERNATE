@@ -48,13 +48,13 @@ public class ClienteController extends HttpServlet{
 	}
 	
 	private void getClientes(PrintWriter out,int start){
-		List<cliente> clientes = session.createCriteria(sucursal.class).
+		List<cliente> clientes = session.createCriteria(cliente.class).
 				add(Restrictions.eq("is_active", new Integer(1))).
 				setFirstResult(start).
 				setMaxResults(9).
 				list();
 		out.print("<table style='padding:10px;' class='table table-hover table-inverse' id='tableSucursales'>");
-		out.print("<tr><td>Razon social</td><td>Rfc</td><td>Calle</td><td>Numero</td><td>Ciudad</td><td>Municipio</td><td>Estado</td><td>Pais</td><td>Codigo postal</td><td>Eliminar</td><td>Editar</td></tr>");
+		out.print("<tr><td>Razon social</td><td>Rfc</td><td>Calle</td><td>Numero</td><td>Ciudad</td><td>Municipio</td><td>Estado</td><td>Pais</td><td>Codigo postal</td><td>Correo</td><td>Telefono</td><td>Eliminar</td><td>Editar</td></tr>");
 		for(cliente cli:clientes){
 			makeCol(out, cli);
 		}
@@ -73,40 +73,46 @@ public class ClienteController extends HttpServlet{
 		out.println("</table>");
 	}
 	//METODO PARA FORMAR UNA COLUMNA DE UNA TABLA
-		public void makeCol(PrintWriter out,cliente suc){
-			out.print("<tr id='"+suc.getIdsucursal()+"'>");
-			out.print("<td id='nombre"+suc.getIdsucursal()+"'>");
-				out.print(suc.getNombre_sucursal());
+		public void makeCol(PrintWriter out,cliente cli){
+			out.print("<tr id='"+cli.getIdcliente()+"'>");
+			out.print("<td id='razonsocial"+cli.getIdcliente()+"'>");
+				out.print(cli.getRazon_social());
 			out.print("</td>");	
-			out.print("<td id='calle"+suc.getIdsucursal()+"'>");
-				out.print(suc.getCalle());
+			out.print("<td id='rfc"+cli.getIdcliente()+"'>");
+				out.print(cli.getRfc());
 			out.print("</td>");
-			out.print("<td id='numero"+suc.getIdsucursal()+"'>");
-				out.print(suc.getNumero());
+			out.print("<td id='calle"+cli.getIdcliente()+"'>");
+				out.print(cli.getCalle());
 			out.print("</td>");
-			out.print("<td id='colonia"+suc.getIdsucursal()+"'>");
-				out.print(suc.getColonia());
+			out.print("<td id='numero"+cli.getIdcliente()+"'>");
+				out.print(cli.getNumero());
 			out.print("</td>");
-			out.print("<td id='ciudad"+suc.getIdsucursal()+"'>");
-				out.print(suc.getCiudad());
+			out.print("<td id='ciudad"+cli.getIdcliente()+"'>");
+				out.print(cli.getCiudad());
 			out.print("</td>");
-			out.print("<td id='municipio"+suc.getIdsucursal()+"'>");
-				out.print(suc.getMunicipio());
+			out.print("<td id='municipio"+cli.getIdcliente()+"'>");
+				out.print(cli.getMunicipio());
 			out.print("</td>");
-			out.print("<td id='estado"+suc.getIdsucursal()+"'>");
-				out.print(suc.getEstado());
+			out.print("<td id='estado"+cli.getIdcliente()+"'>");
+				out.print(cli.getEstado());
 			out.print("</td>");
-			out.print("<td id='pais"+suc.getIdsucursal()+"'>");
-				out.print(suc.getPais());
+			out.print("<td id='pais"+cli.getIdcliente()+"'>");
+				out.print(cli.getPais());
 			out.print("</td>");
-			out.print("<td id='cp"+suc.getIdsucursal()+"'>");
-				out.print(suc.getCp());
+			out.print("<td id='cp"+cli.getIdcliente()+"'>");
+				out.print(cli.getCp());
 			out.print("</td>");
-			out.print("<td id='eliminar"+suc.getIdsucursal()+"'>");
-				out.print("<a href='#' onclick='return eliminar("+suc.getIdsucursal()+")'><img width='30px' height='30px' src='../../img/delete.png'/></a>");
+			out.print("<td id='correo"+cli.getIdcliente()+"'>");
+				out.print(cli.getEmail());
 			out.print("</td>");
-			out.print("<td id='editar"+suc.getIdsucursal()+"'>");
-				out.print("<a href='#' onclick='return editar("+suc.getIdsucursal()+")'><img width='30px' height='30px' src='../../img/update.png'/></a>");
+			out.print("<td id='telefono"+cli.getIdcliente()+"'>");
+				out.print(cli.getTelefono());
+			out.print("</td>");
+			out.print("<td id='eliminar"+cli.getIdcliente()+"'>");
+				out.print("<a href='#' onclick='return eliminar("+cli.getIdcliente()+")'><img width='30px' height='30px' src='../../img/delete.png'/></a>");
+			out.print("</td>");
+			out.print("<td id='editar"+cli.getIdcliente()+"'>");
+				out.print("<a href='#' onclick='return editar("+cli.getIdcliente()+")'><img width='30px' height='30px' src='../../img/update.png'/></a>");
 			out.print("</td>");
 		out.print("</tr>");
 	}
