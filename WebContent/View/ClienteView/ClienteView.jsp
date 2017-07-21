@@ -74,7 +74,30 @@
 		alert(id);
 	}
 	function eliminar(id){
-		alert(id);
+		if(confirmacion("Esta seguro que desea realizar la eliminacion?")){
+			$.ajax({
+				url:'../../ClienteController',
+				type:'POST',
+				data:{
+					'operacion':'delete',
+					'id':id
+				},
+				beforeSend:function(e){
+					$("#espera").html("<img src='../../img/cargando.gif' />");
+				},
+				success:function(e){
+					$("#espera").html(e);
+				}
+			});
+		}
+			
+	}
+	function confirmacion(messaje){
+		if(confirm(messaje)){
+			return true;	
+		}else{
+			return false;
+		}
 	}
 </script>
 <!-- INCLUYENDO EL MODAL PARA AGREGAR CLIENTES -->

@@ -43,7 +43,6 @@ public class ClienteController extends HttpServlet{
 		case "getClientes":
 			getClientes(response.getWriter(),Integer.parseInt(request.getParameter("start")));
 		break;
-
 		default:
 			break;
 		}
@@ -57,9 +56,37 @@ public class ClienteController extends HttpServlet{
 		case "addCliente":
 			insertarSucursal(request, response.getWriter());
 		break;
-
+		case "delete":
+			deleteCliente(Integer.parseInt(request.getParameter("id")),response.getWriter());
+		break;
 		default:
 			break;
+		}
+	}
+	public void deleteCliente(int id,PrintWriter out){
+		
+		
+		Transaction tx = null;
+		
+		try{
+			
+			tx = session.getTransaction();
+			
+			tx.begin();
+			
+			cliente cli = session.get(cliente.class, id);
+			
+			cli.setIs_active(0);
+			
+			session.update(cli);
+			
+			getClientes(out, 0);
+			
+			tx.commit();
+			
+		}catch(Exception e){
+			tx.rollback();
+			System.out.println(e.getMessage());
 		}
 	}
 	
