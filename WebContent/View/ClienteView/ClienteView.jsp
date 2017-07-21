@@ -71,7 +71,18 @@
 		return null;
 	}
 	function editar(id){
-		alert(id);
+		$("#razonsocial"+id).html('<input class="form-control" id="razonsociali'+id+'" size="6" type="text" placeholder="Razon social..." value="'+$("#razonsocial"+id).text()+'" />');
+		$("#rfc"+id).html('<input class="form-control" id="rfci'+id+'" size="6" type="text" placeholder="Rfc..." value="'+$("#rfc"+id).text()+'" />');
+		$("#calle"+id).html('<input class="form-control" id="callei'+id+'" size="6" type="text" placeholder="Calle..." value="'+$("#calle"+id).text()+'" />');
+		$("#numero"+id).html('<input class="form-control" id="numeroi'+id+'" size="6" type="text" placeholder="Numero..." value="'+$("#numero"+id).text()+'" />');
+		$("#cp"+id).html('<input class="form-control" id="cpi'+id+'" size="6" type="text" placeholder="Codigo postal..." value="'+$("#cp"+id).text()+'" />');
+		$("#ciudad"+id).html('<input class="form-control" id="ciudadi'+id+'" size="6" type="text" placeholder="Ciudad..." value="'+$("#ciudad"+id).text()+'" />');
+		$("#municipio"+id).html('<input class="form-control" id="municipioi'+id+'" size="6" type="text" placeholder="Municipio..." value="'+$("#municipio"+id).text()+'" />');
+		$("#estado"+id).html('<input class="form-control" size="6" id="estadoi'+id+'" type="text" placeholder="Estado..." value="'+$("#estado"+id).text()+'" />');
+		$("#pais"+id).html('<input class="form-control" size="6" id="paisi'+id+'" type="text" placeholder="Pais..." value="'+$("#pais"+id).text()+'" />');
+		$("#correo"+id).html('<input class="form-control" size="6" id="correoi'+id+'" type="text" placeholder="Correo..." value="'+$("#correo"+id).text()+'" />');
+		$("#telefono"+id).html('<input class="form-control" size="6" id="telefonoi'+id+'" type="text" placeholder="Telegono..." value="'+$("#telefono"+id).text()+'" />');
+		$("#editar"+id).html('<button class="btn btn-primary" onclick="return editar_btn('+id+');">Editar</button>');
 	}
 	function eliminar(id){
 		if(confirmacion("Esta seguro que desea realizar la eliminacion?")){
@@ -91,6 +102,9 @@
 			});
 		}
 			
+	}
+	function editar_btn(id){
+		
 	}
 	function confirmacion(messaje){
 		if(confirm(messaje)){
