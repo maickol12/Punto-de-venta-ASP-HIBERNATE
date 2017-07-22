@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
@@ -34,36 +35,62 @@ public class CajaController extends HttpServlet{
 	
 	protected void doPost(HttpServletRequest request,HttpServletResponse response) throws IOException{
 		String operacion = mg.comprobarSession(request, response);
-		
+		System.out.println(operacion+" "+request.getParameter("id"));
 		switch (operacion) {
-		case "operacion":
+			case "delete":
+				System.out.println("delete "+request.getParameter("id") );
+				deleteCaja(Integer.parseInt(request.getParameter("id")),response.getWriter());
+			break;
+		}
+	}
+	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws IOException{
+	String operacion = mg.comprobarSession(request, response);
+		System.out.println(operacion+" "+request.getParameter("id"));
+		switch (operacion) {
+		case "getCajas":
 			int start = Integer.parseInt(request.getParameter("start"));
 			getCajas(start,response.getWriter());
-			break;
-
+		break;
 		default:
 			break;
 		}
 	}
-	protected void doGet(HttpServletRequest request,HttpServletResponse response){
-	
+	private void deleteCaja(int id,PrintWriter out){
+		caja caj = session.get(caja.class, id);
+		
+		Transaction tx = null;
+		try{
+			tx = session.getTransaction();
+			tx.begin();
+			caj.setIs_active(0);
+			session.update(caj);
+			getCajas(0, out);
+			tx.commit();
+		}catch(Exception e){
+			tx.rollback();
+			
+		}
 	}
 	private void getCajas(int start,PrintWriter out){
 		List<caja> cajas = session.createCriteria(caja.class).
-				add(Restrictions.eqOrIsNull("is_active", new Integer(1))).
+				//add(Restrictions.eqOrIsNull("is_active", new Integer(1))).
 				setFirstResult(start).
 				setMaxResults(9).
 				list();
-		
+		out.print("<table style='padding:10px;' class='table table-hover table-inverse' id='tableSucursales'>");
+		out.print("<tr><td>Codigo caja</td><td>Abierta/Cerrada</td><td>Eliminar</td><td>Editar</td></tr>");
+		for(caja cli:cajas){
+			makeCol(out, cli);
+		}
 		
 		
 		out.print("</table>");
 		out.print("<nav aria-label='Page navigation'>");
 		out.print("<ul class='pagination'>");
-		int count = getCountClientes();
+		int count = getCountCajas();
 		int contador = 1;
 		   for(int i = 0;i<count;i+=10){
-		    	out.print("<li><a href='#' onclick='return getClientes("+i+")'>"+contador+"</a></li>");
+		    	out.print("<li><a href='#' onclick='return getCajas("+i+")'>"+contador+"</a></li>");
 		    	contador++;
 		    }
 		out.print("</li>");
@@ -75,46 +102,27 @@ public class CajaController extends HttpServlet{
 	
 	
 	//METODO PARA FORMAR UNA COLUMNA DE UNA TABLA
-			public void makeCol(PrintWriter out,cliente cli){
-				out.print("<tr id='"+cli.getIdcliente()+"'>");
-				out.print("<td id='razonsocial"+cli.getIdcliente()+"'>");
-					out.print(cli.getRazon_social());
+			public void makeCol(PrintWriter out,caja caj){
+				String active = "";
+				String mensaje = "No activa";
+				if(caj.getIs_active() == 1){
+					active = "success";
+					mensaje = "Activa";
+				}else{
+					active = "danger";
+				}
+				out.print("<tr id='"+caj.getIdcaja()+"' class='"+active+"'>");
+				out.print("<td id='codigocaja"+caj.getIdcaja()+"'>");
+					out.print(caj.getCodigo_caja());
 				out.print("</td>");	
-				out.print("<td id='rfc"+cli.getIdcliente()+"'>");
-					out.print(cli.getRfc());
+				out.print("<td id='isopen"+caj.getIdcaja()+"' >");
+					out.print(mensaje);
+				out.print("</td>");	
+				out.print("<td id='eliminar"+caj.getIdcaja()+"'>");
+					out.print("<a href='#' onclick='return eliminar("+caj.getIdcaja()+")'><img width='30px' height='30px' src='../../img/delete.png'/></a>");
 				out.print("</td>");
-				out.print("<td id='calle"+cli.getIdcliente()+"'>");
-					out.print(cli.getCalle());
-				out.print("</td>");
-				out.print("<td id='numero"+cli.getIdcliente()+"'>");
-					out.print(cli.getNumero());
-				out.print("</td>");
-				out.print("<td id='ciudad"+cli.getIdcliente()+"'>");
-					out.print(cli.getCiudad());
-				out.print("</td>");
-				out.print("<td id='municipio"+cli.getIdcliente()+"'>");
-					out.print(cli.getMunicipio());
-				out.print("</td>");
-				out.print("<td id='estado"+cli.getIdcliente()+"'>");
-					out.print(cli.getEstado());
-				out.print("</td>");
-				out.print("<td id='pais"+cli.getIdcliente()+"'>");
-					out.print(cli.getPais());
-				out.print("</td>");
-				out.print("<td id='cp"+cli.getIdcliente()+"'>");
-					out.print(cli.getCp());
-				out.print("</td>");
-				out.print("<td id='correo"+cli.getIdcliente()+"'>");
-					out.print(cli.getEmail());
-				out.print("</td>");
-				out.print("<td id='telefono"+cli.getIdcliente()+"'>");
-					out.print(cli.getTelefono());
-				out.print("</td>");
-				out.print("<td id='eliminar"+cli.getIdcliente()+"'>");
-					out.print("<a href='#' onclick='return eliminar("+cli.getIdcliente()+")'><img width='30px' height='30px' src='../../img/delete.png'/></a>");
-				out.print("</td>");
-				out.print("<td id='editar"+cli.getIdcliente()+"'>");
-					out.print("<a href='#' onclick='return editar("+cli.getIdcliente()+")'><img width='30px' height='30px' src='../../img/update.png'/></a>");
+				out.print("<td id='editar"+caj.getIdcaja()+"'>");
+					out.print("<a href='#' onclick='return editar("+caj.getIdcaja()+")'><img width='30px' height='30px' src='../../img/update.png'/></a>");
 				out.print("</td>");
 			out.print("</tr>");
 		}

@@ -13,6 +13,7 @@
 	function getAllCajas(start){
 		$.ajax({
 			url:'../../CajaController',
+			type:'GET',
 			data:{
 				'start':start,
 				'operacion':'getCajas'
@@ -24,5 +25,33 @@
 				$("#espera").html(e);				
 			}
 		});
+	}
+	function eliminar(id){
+		if(confirm("Estas seguro que desea realizar la eliminacion?")){
+			$.ajax({
+				url:'../../CajaController',
+				type:'POST',
+				data:{
+					'id':id,
+					'operacion':'delete'
+				},
+				beforeSend:function(e){
+					$("#espera").html("<center><img width='200px' height='200px' src='../../img/cargando.gif' /></center>");
+				},
+				success:function(e){
+					$("#espera").html(e);
+				}
+			});
+		}
+	}
+	function editar(id){
+		alert(id);
+	}
+	function confirmacion(messaje){
+		if(confirm(messaje)){
+			return true;	
+		}else{
+			return false;
+		}
 	}
 </script>
