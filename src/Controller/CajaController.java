@@ -54,6 +54,9 @@ public class CajaController extends HttpServlet{
 			int start = Integer.parseInt(request.getParameter("start"));
 			getCajas(start,response.getWriter());
 		break;
+		case "find":
+			findCaja(request.getParameter("data"),response.getWriter());
+		break;
 		default:
 			break;
 		}
@@ -76,6 +79,33 @@ public class CajaController extends HttpServlet{
 		}catch(Exception e){
 			tx.rollback();
 		}
+	}
+	private void findCaja(String data,PrintWriter out){
+		List<caja> cajas = session.createCriteria(caja.class).
+					 add(Restrictions.like("codigo_caja","%"+data+"%")).
+					 setMaxResults(9).
+					 list();
+		
+		out.print("<table style='padding:10px;' class='table table-hover table-inverse' id='tableCaja'>");
+		out.print("<tr><td>Codigo caja</td><td>Abierta/Cerrada</td><td>Eliminar</td><td>Editar</td></tr>");
+		for(caja cli:cajas){
+			makeCol(out, cli);
+		}
+		
+		
+		out.print("</table>");
+		out.print("<nav aria-label='Page navigation'>");
+		out.print("<ul class='pagination'>");
+		int count = getCountCajas();
+		int contador = 1;
+		   for(int i = 0;i<count;i+=10){
+		    	out.print("<li><a href='#' onclick='return getCajas("+i+")'>"+contador+"</a></li>");
+		    	contador++;
+		    }
+		out.print("</li>");
+		out.print("</ul>");
+		out.print("</nav>");
+		out.println("</table>");
 	}
 	private void deleteCaja(int id,PrintWriter out){
 		caja caj = session.get(caja.class, id);
@@ -151,5 +181,5 @@ public class CajaController extends HttpServlet{
 		public Integer getCountCajas(){
 			return ((Long)session.createCriteria(caja.class).setProjection(Projections.rowCount()).add(Restrictions.eqOrIsNull("is_active",new Integer(1))).uniqueResult()).intValue();
 		}
-
+		
 }

@@ -88,4 +88,20 @@
 			});
 		}
 	}
+	$("#buscarCajas").keyup(function(e){
+		$.ajax({
+			url:'../../CajaController',
+			type:'GET',
+			data:{
+				'operacion':'find',
+				'data':$("#buscarCajas").val()
+			},
+			beforeSend:function(e){
+				$("#espera").html("<center><img width='200px' height='200px' src='../../img/cargando.gif' /></center>");
+			},
+			success:function(e){
+				$("#espera").html(e);
+			}
+		});
+	});
 </script>

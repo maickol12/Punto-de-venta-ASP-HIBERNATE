@@ -94,6 +94,7 @@ public class ClienteController extends HttpServlet{
 			
 			cli.setRazon_social(razonsocial);
 			cli.setRfc(rfc);
+			cli.setCalle(calle);
 			cli.setCiudad(ciudad);
 			cli.setNumero(Integer.parseInt(numero));
 			cli.setCp(cp);
