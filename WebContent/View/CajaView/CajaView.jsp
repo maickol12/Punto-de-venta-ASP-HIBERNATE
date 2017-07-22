@@ -45,7 +45,20 @@
 		}
 	}
 	function editar(id){
-		alert(id);
+		var activa = $("#isopen"+id).val();
+		var select = "<select class='form-control'>";
+		if(activa == "Activa"){
+			select += "<option value='1'>Activa</option>"; 
+			select += "<option value='0'>No activa</option>";
+		}else{
+			select += "<option value='0'>No activa</option>";
+			select += "<option value='1'>Activa</option>"; 
+		}
+		select += "</select>";
+		
+		$("#codigocaja"+id).html('<input class="form-control" id="codigocajai'+id+'" size="6" type="text" placeholder="Codigo caja..." value="'+$("#codigocaja"+id).text()+'" />');
+		$("#isopen"+id).html(select);
+		$("#editar"+id).html('<button class="btn btn-primary" onclick="return editar_btn('+id+');">Editar</button>');
 	}
 	function confirmacion(messaje){
 		if(confirm(messaje)){
