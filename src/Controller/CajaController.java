@@ -41,6 +41,9 @@ public class CajaController extends HttpServlet{
 				System.out.println("delete "+request.getParameter("id") );
 				deleteCaja(Integer.parseInt(request.getParameter("id")),response.getWriter());
 			break;
+			case "edit":
+				editarCaja(request,response);
+			break;
 		}
 	}
 	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws IOException{
@@ -53,6 +56,25 @@ public class CajaController extends HttpServlet{
 		break;
 		default:
 			break;
+		}
+	}
+	public void editarCaja(HttpServletRequest request,HttpServletResponse response){
+		int id = Integer.parseInt(request.getParameter("idcaja"));
+		String codigo_caja = request.getParameter("codigocaja");
+		int isopen = Integer.parseInt(request.getParameter("isopen"));
+		
+		Transaction tx = null;
+		try{
+			tx = session.beginTransaction();
+			tx.begin();
+			caja c = session.get(caja.class, id);
+			c.setCodigo_caja(codigo_caja);
+			c.setIs_open(isopen);
+			session.update(c);
+			getCajas(0, response.getWriter());
+			tx.commit();
+		}catch(Exception e){
+			tx.rollback();
 		}
 	}
 	private void deleteCaja(int id,PrintWriter out){
@@ -73,11 +95,11 @@ public class CajaController extends HttpServlet{
 	}
 	private void getCajas(int start,PrintWriter out){
 		List<caja> cajas = session.createCriteria(caja.class).
-				//add(Restrictions.eqOrIsNull("is_active", new Integer(1))).
+				add(Restrictions.eqOrIsNull("is_active", new Integer(1))).
 				setFirstResult(start).
 				setMaxResults(9).
 				list();
-		out.print("<table style='padding:10px;' class='table table-hover table-inverse' id='tableSucursales'>");
+		out.print("<table style='padding:10px;' class='table table-hover table-inverse' id='tableCaja'>");
 		out.print("<tr><td>Codigo caja</td><td>Abierta/Cerrada</td><td>Eliminar</td><td>Editar</td></tr>");
 		for(caja cli:cajas){
 			makeCol(out, cli);
@@ -105,7 +127,7 @@ public class CajaController extends HttpServlet{
 			public void makeCol(PrintWriter out,caja caj){
 				String active = "";
 				String mensaje = "No activa";
-				if(caj.getIs_active() == 1){
+				if(caj.getIs_open() == 1){
 					active = "success";
 					mensaje = "Activa";
 				}else{

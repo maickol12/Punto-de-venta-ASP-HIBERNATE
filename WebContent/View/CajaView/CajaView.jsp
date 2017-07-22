@@ -45,8 +45,8 @@
 		}
 	}
 	function editar(id){
-		var activa = $("#isopen"+id).val();
-		var select = "<select class='form-control'>";
+		var activa = $("#isopen"+id).text();
+		var select = "<select id='isopeni"+id+"' class='form-control'>";
 		if(activa == "Activa"){
 			select += "<option value='1'>Activa</option>"; 
 			select += "<option value='0'>No activa</option>";
@@ -65,6 +65,27 @@
 			return true;	
 		}else{
 			return false;
+		}
+	}
+	function editar_btn(id){
+		data = {
+			'idcaja':id,
+			'codigocaja':$("#codigocajai"+id).val(),
+			'isopen':$("#isopeni"+id).val(),
+			'operacion':'edit'
+		}
+		if(confirm("Estas seguro que desea llevar acabo la edicion?")){
+			$.ajax({
+				url:'../../CajaController',
+				type:'POST',
+				data:data,
+				beforeSend:function(e){
+					$("#espera").html("<center><img width='200px' height='200px' src='../../img/cargando.gif' /></center>");
+				},
+				success:function(e){
+					$("#espera").html(e);
+				}
+			});
 		}
 	}
 </script>
