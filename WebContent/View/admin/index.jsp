@@ -30,7 +30,11 @@
 	%>
 			<jsp:include page="../CajaView/CajaView.jsp"></jsp:include>	
 	<% 
-		} 
+		}else if(request.getParameter("opcion").equalsIgnoreCase("ventas")){
+	%>
+			<jsp:include page="../VentaView/VentaView.jsp"></jsp:include>
+	<%
+		}
 	%>
 </body>
 <script type="text/javascript" src="../../js/jquery.js"></script>
