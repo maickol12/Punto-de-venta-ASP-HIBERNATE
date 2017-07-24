@@ -45,6 +45,9 @@
 		<property name="f_baja" type="java.util.Date">
 			<column name="f_baja"></column>
 		</property>
+		<property name="f_update" type="java.util.Date">
+			<column name="f_update"></column>
+		</property>
 		<property name="is_active" type="int">
 			<column name="is_active"></column>
 		</property>

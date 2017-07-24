@@ -7,8 +7,8 @@
 			</column>
 			<generator class="identity"></generator>
 		</id>
-		<property name="tipo_usuario" type="int">
-			<column name="tipo_usuario"></column>
+		<property name="idtipo_usuario" type="int">
+			<column name="idtipo_usuario"></column>
 		</property>
 		<property name="username" type="java.lang.String">
 			<column name="username"></column>

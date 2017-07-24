@@ -7,7 +7,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 public class Usuario {
-	private int idusuario,tipo_usuario;
+	private int idusuario,idtipo_usuario;
 	private String username,password,email,nombre,direccion,telefono;
 	private int is_active;
 	private tipo_usuario t_u;
@@ -80,12 +80,12 @@ public class Usuario {
 		this.idusuario = idusuario;
 	}
 
-	public int getTipo_usuario() {
-		return tipo_usuario;
+	public int getIdtipo_usuario() {
+		return idtipo_usuario;
 	}
 
-	public void setTipo_usuario(int tipo_usuario) {
-		this.tipo_usuario = tipo_usuario;
+	public void setIdtipo_usuario(int idtipo_usuario) {
+		this.idtipo_usuario = idtipo_usuario;
 	}
 
 	public String getUsername() {

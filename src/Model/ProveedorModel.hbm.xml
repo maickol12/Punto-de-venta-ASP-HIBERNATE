@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	<class name="esqueletos.proveedor">
+		<id name="idproveedor">
+			<column name="idproveedor"/>
+			<generator class="identity"/>
+		</id>
+		<property name="razon_social"/>
+		<property name="rfc"/>
+		<property name="calle"/>
+		<property name="numero"/>
+		<property name="ciudad"/>
+		<property name="municipio"/>
+		<property name="estado"/>
+		<property name="pais"/>
+		<property name="cp"/>
+		<property name="f_alta" type="java.util.Date"/>
+		<property name="f_baja" type="java.util.Date"/>
+		<property name="is_active"></property>
+	</class>
+</hibernate-mapping>

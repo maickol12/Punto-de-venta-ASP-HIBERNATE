@@ -6,12 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-public class cliente {
-	private int idcliente,numero,is_active;
-	private String razon_social,rfc,calle,ciudad,municipio,estado;
-	private String pais,cp,email,telefono;
+public class proveedor {
+	private int idproveedor,is_active;
+	private String razon_social,rfc,calle,numero,ciudad,municipio,estado,pais,cp;
 	
-	@Column(name = "f_alta", columnDefinition="DATETIME")
+	@Column(name = "f_alta",columnDefinition="DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date f_alta;
 	
@@ -23,20 +22,12 @@ public class cliente {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date f_update;
 
-	public int getIdcliente() {
-		return idcliente;
+	public int getIdproveedor() {
+		return idproveedor;
 	}
 
-	public void setIdcliente(int idcliente) {
-		this.idcliente = idcliente;
-	}
-
-	public int getNumero() {
-		return numero;
-	}
-
-	public void setNumero(int numero) {
-		this.numero = numero;
+	public void setIdproveedor(int idproveedor) {
+		this.idproveedor = idproveedor;
 	}
 
 	public int getIs_active() {
@@ -69,6 +60,14 @@ public class cliente {
 
 	public void setCalle(String calle) {
 		this.calle = calle;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
 	}
 
 	public String getCiudad() {
@@ -111,22 +110,6 @@ public class cliente {
 		this.cp = cp;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
-
 	public Date getF_alta() {
 		return f_alta;
 	}
@@ -150,7 +133,6 @@ public class cliente {
 	public void setF_update(Date f_update) {
 		this.f_update = f_update;
 	}
-	
 	
 	
 }

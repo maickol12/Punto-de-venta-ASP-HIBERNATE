@@ -48,7 +48,7 @@ public class UsuarioController extends HttpServlet{
 			HttpSession ses = request.getSession();
 			
 			Usuario user = usuario.get(0);
-			ses.setAttribute("tipo_usuario", user.getTipo_usuario());
+			ses.setAttribute("tipo_usuario", user.getIdtipo_usuario());
 			ses.setAttribute("id_usuario",user.getIdusuario());
 			ses.setAttribute("username", user.getUsername());
 			response.sendRedirect("View/admin");
