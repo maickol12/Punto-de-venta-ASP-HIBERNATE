@@ -41,7 +41,9 @@ public class ProveedoresController extends HttpServlet{
 		case "getProveedores":
 			getProveedores(response.getWriter(),Integer.parseInt(request.getParameter("start")));
 		break;
-		
+		case "findProveedor":
+			findProveedor(request,response.getWriter());
+		break;
 		default:
 			break;
 		}
@@ -63,6 +65,30 @@ public class ProveedoresController extends HttpServlet{
 		default:
 			break;
 		}
+	}
+	private void findProveedor(HttpServletRequest request,PrintWriter out){
+		List<proveedor> proveedores = session.createCriteria(proveedor.class).
+				add(Restrictions.eq("is_active", new Integer(1))).
+				add(Restrictions.like("razon_social", "%"+request.getParameter("data")+"%")).
+				list();
+		out.print("<table style='padding:10px;' class='table table-hover table-inverse' id='tableSucursales'>");
+		out.print("<tr><td>Razon social</td><td>Rfc</td><td>Calle</td><td>Numero</td><td>Ciudad</td><td>Municipio</td><td>Estado</td><td>Pais</td><td>Codigo postal</td><td>Eliminar</td><td>Editar</td></tr>");
+		for(proveedor pro:proveedores){
+			makeCol(out, pro);
+		}
+		out.print("</table>");
+		out.print("<nav aria-label='Page navigation'>");
+		out.print("<ul class='pagination'>");
+		int count = getCountProveedores();
+		int contador = 1;
+		   for(int i = 0;i<count;i+=10){
+		    	out.print("<li><a href='#' onclick='return getClientes("+i+")'>"+contador+"</a></li>");
+		    	contador++;
+		    }
+		out.print("</li>");
+		out.print("</ul>");
+		out.print("</nav>");
+		out.println("</table>");
 	}
 	private void deleteProovedor(HttpServletRequest request,PrintWriter out){
 		int id = Integer.parseInt(request.getParameter("id"));

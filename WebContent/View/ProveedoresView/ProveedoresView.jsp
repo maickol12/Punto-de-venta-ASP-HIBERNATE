@@ -95,13 +95,13 @@
 			}
 		});
 	}
-	function eliminar(id){
+	$("#buscarProveedores").keyup(function(e){
 		$.ajax({
 			url:'../../ProveedoresController',
-			type:'POST',
+			type:'GET',
 			data:{
-				'id':id,
-				'operacion':'deleteProveedor'
+				'operacion':'findProveedor',
+				'data':$("#buscarProveedores").val()
 			},
 			beforeSend:function(e){
 				$("#espera").html("<center><img width='200px' height='200px' src='../../img/cargando.gif' /></center>");
@@ -109,7 +109,26 @@
 			success:function(e){
 				$("#espera").html(e);
 			}
+			
 		});
+	});
+	function eliminar(id){
+		if(confirm("Estas seguro que deseas realizar la eliminacion?")){
+			$.ajax({
+				url:'../../ProveedoresController',
+				type:'POST',
+				data:{
+					'id':id,
+					'operacion':'deleteProveedor'
+				},
+				beforeSend:function(e){
+					$("#espera").html("<center><img width='200px' height='200px' src='../../img/cargando.gif' /></center>");
+				},
+				success:function(e){
+					$("#espera").html(e);
+				}
+			});
+		}
 	}
 </script>
 
