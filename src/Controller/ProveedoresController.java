@@ -41,7 +41,7 @@ public class ProveedoresController extends HttpServlet{
 		case "getProveedores":
 			getProveedores(response.getWriter(),Integer.parseInt(request.getParameter("start")));
 		break;
-
+		
 		default:
 			break;
 		}
@@ -54,9 +54,68 @@ public class ProveedoresController extends HttpServlet{
 		case "addProveedor":
 			addProveedor(request,response.getWriter());
 		break;
-
+		case "editarProveedor":
+			editProveedor(request,response);
+		break;
+		case "deleteProveedor":
+			deleteProovedor(request,response.getWriter());
+		break;
 		default:
 			break;
+		}
+	}
+	private void deleteProovedor(HttpServletRequest request,PrintWriter out){
+		int id = Integer.parseInt(request.getParameter("id"));
+		
+		Transaction tx = null;
+		
+		try{
+			tx = session.getTransaction();
+			tx.begin();
+			proveedor pro = session.get(proveedor.class, id);
+			pro.setIs_active(0);
+			session.update(pro);
+			getProveedores(out, 0);
+			tx.commit();
+			
+			
+		}catch(Exception e){
+			tx.rollback();
+		}
+	}
+	private void editProveedor(HttpServletRequest request,HttpServletResponse response){
+		String razonsocial = request.getParameter("razonsocial");
+		String rfc = request.getParameter("rfc");
+		String calle = request.getParameter("calle");
+		String numero = request.getParameter("numero");
+		String cp = request.getParameter("cp");
+		String ciudad = request.getParameter("ciudad");
+		String municipio = request.getParameter("municipio");
+		String estado = request.getParameter("estado");
+		String pais = request.getParameter("pais");
+		int id = Integer.parseInt(request.getParameter("idproveedor"));
+		proveedor pro;
+		Transaction tx = null;
+		try{
+			tx = session.getTransaction();
+			tx.begin();
+			pro = session.get(proveedor.class, id);
+			pro.setRazon_social(razonsocial);
+			pro.setRfc(rfc);
+			pro.setCalle(calle);
+			pro.setNumero(numero);
+			pro.setCp(cp);
+			pro.setCiudad(ciudad);
+			pro.setMunicipio(municipio);
+			pro.setEstado(estado);
+			pro.setPais(pais);
+			
+			session.update(pro);
+			getProveedores(response.getWriter(), 0);
+			tx.commit();
+			
+		}catch(Exception e){
+			tx.rollback();
 		}
 	}
 	private void addProveedor(HttpServletRequest request,PrintWriter out){
