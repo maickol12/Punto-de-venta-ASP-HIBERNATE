@@ -55,14 +55,14 @@ public class ProveedoresController extends HttpServlet{
 				list();
 		
 		out.print("<table style='padding:10px;' class='table table-hover table-inverse' id='tableSucursales'>");
-		out.print("<tr><td>Razon social</td><td>Rfc</td><td>Calle</td><td>Numero</td><td>Ciudad</td><td>Municipio</td><td>Estado</td><td>Pais</td><td>Codigo postal</td><td>Correo</td><td>Telefono</td><td>Eliminar</td><td>Editar</td></tr>");
+		out.print("<tr><td>Razon social</td><td>Rfc</td><td>Calle</td><td>Numero</td><td>Ciudad</td><td>Municipio</td><td>Estado</td><td>Pais</td><td>Codigo postal</td><td>Eliminar</td><td>Editar</td></tr>");
 		for(proveedor pro:proveedores){
 			makeCol(out, pro);
 		}
 		out.print("</table>");
 		out.print("<nav aria-label='Page navigation'>");
 		out.print("<ul class='pagination'>");
-		int count = getCountClientes();
+		int count = getCountProveedores();
 		int contador = 1;
 		   for(int i = 0;i<count;i+=10){
 		    	out.print("<li><a href='#' onclick='return getClientes("+i+")'>"+contador+"</a></li>");
@@ -75,46 +75,40 @@ public class ProveedoresController extends HttpServlet{
 	}
 	
 	//METODO PARA FORMAR UNA COLUMNA DE UNA TABLA
-			public void makeCol(PrintWriter out,proveedor cli){
-				out.print("<tr id='"+cli.getIdcliente()+"'>");
-				out.print("<td id='razonsocial"+cli.getIdcliente()+"'>");
-					out.print(cli.getRazon_social());
+			public void makeCol(PrintWriter out,proveedor pro){
+				out.print("<tr id='"+pro.getIdproveedor()+"'>");
+				out.print("<td id='razonsocial"+pro.getIdproveedor()+"'>");
+					out.print(pro.getRazon_social());
 				out.print("</td>");	
-				out.print("<td id='rfc"+cli.getIdcliente()+"'>");
-					out.print(cli.getRfc());
+				out.print("<td id='rfc"+pro.getIdproveedor()+"'>");
+					out.print(pro.getRfc());
 				out.print("</td>");
-				out.print("<td id='calle"+cli.getIdcliente()+"'>");
-					out.print(cli.getCalle());
+				out.print("<td id='calle"+pro.getIdproveedor()+"'>");
+					out.print(pro.getCalle());
 				out.print("</td>");
-				out.print("<td id='numero"+cli.getIdcliente()+"'>");
-					out.print(cli.getNumero());
+				out.print("<td id='numero"+pro.getIdproveedor()+"'>");
+					out.print(pro.getNumero());
 				out.print("</td>");
-				out.print("<td id='ciudad"+cli.getIdcliente()+"'>");
-					out.print(cli.getCiudad());
+				out.print("<td id='ciudad"+pro.getIdproveedor()+"'>");
+					out.print(pro.getCiudad());
 				out.print("</td>");
-				out.print("<td id='municipio"+cli.getIdcliente()+"'>");
-					out.print(cli.getMunicipio());
+				out.print("<td id='municipio"+pro.getIdproveedor()+"'>");
+					out.print(pro.getMunicipio());
 				out.print("</td>");
-				out.print("<td id='estado"+cli.getIdcliente()+"'>");
-					out.print(cli.getEstado());
+				out.print("<td id='estado"+pro.getIdproveedor()+"'>");
+					out.print(pro.getEstado());
 				out.print("</td>");
-				out.print("<td id='pais"+cli.getIdcliente()+"'>");
-					out.print(cli.getPais());
+				out.print("<td id='pais"+pro.getIdproveedor()+"'>");
+					out.print(pro.getPais());
 				out.print("</td>");
-				out.print("<td id='cp"+cli.getIdcliente()+"'>");
-					out.print(cli.getCp());
+				out.print("<td id='cp"+pro.getIdproveedor()+"'>");
+					out.print(pro.getCp());
 				out.print("</td>");
-				out.print("<td id='correo"+cli.getIdcliente()+"'>");
-					out.print(cli.getEmail());
+				out.print("<td id='eliminar"+pro.getIdproveedor()+"'>");
+					out.print("<a href='#' onclick='return eliminar("+pro.getIdproveedor()+")'><img width='30px' height='30px' src='../../img/delete.png'/></a>");
 				out.print("</td>");
-				out.print("<td id='telefono"+cli.getIdcliente()+"'>");
-					out.print(cli.getTelefono());
-				out.print("</td>");
-				out.print("<td id='eliminar"+cli.getIdcliente()+"'>");
-					out.print("<a href='#' onclick='return eliminar("+cli.getIdcliente()+")'><img width='30px' height='30px' src='../../img/delete.png'/></a>");
-				out.print("</td>");
-				out.print("<td id='editar"+cli.getIdcliente()+"'>");
-					out.print("<a href='#' onclick='return editar("+cli.getIdcliente()+")'><img width='30px' height='30px' src='../../img/update.png'/></a>");
+				out.print("<td id='editar"+pro.getIdproveedor()+"'>");
+					out.print("<a href='#' onclick='return editar("+pro.getIdproveedor()+")'><img width='30px' height='30px' src='../../img/update.png'/></a>");
 				out.print("</td>");
 			out.print("</tr>");
 		}
