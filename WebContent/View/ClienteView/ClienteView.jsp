@@ -2,7 +2,6 @@
 	<div id="espera" class="">
 		
 	</div>
-</table>
 </div>
 
 

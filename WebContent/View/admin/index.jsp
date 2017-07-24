@@ -16,23 +16,27 @@
 	<%
 		if(request.getParameter("opcion")==null){
 	%>
-			<jsp:include page="../opciones.jsp"></jsp:include>
+			<jsp:include page="../opciones.jsp"/>
 	<%
 		}else if(request.getParameter("opcion").equalsIgnoreCase("sucursales")){
 	%>
-			<jsp:include page="../sucursal/SucursalView.jsp"></jsp:include>
+			<jsp:include page="../sucursal/SucursalView.jsp"/>
 	<% 
 		}else if(request.getParameter("opcion").equalsIgnoreCase("clientes")){
 	%>
-			<jsp:include page="../ClienteView/ClienteView.jsp"></jsp:include>
+			<jsp:include page="../ClienteView/ClienteView.jsp"/>
 	<%
 		}else if(request.getParameter("opcion").equalsIgnoreCase("cajas")){
 	%>
-			<jsp:include page="../CajaView/CajaView.jsp"></jsp:include>	
+			<jsp:include page="../CajaView/CajaView.jsp"/>	
 	<% 
 		}else if(request.getParameter("opcion").equalsIgnoreCase("ventas")){
 	%>
-			<jsp:include page="../VentaView/VentaView.jsp"></jsp:include>
+			<jsp:include page="../VentaView/VentaView.jsp"/>
+	<%
+		}else if(request.getParameter("opcion").equalsIgnoreCase("Proveedores")){
+	%>
+		<jsp:include page="../ProveedoresView/ProveedoresView.jsp"/>
 	<%
 		}
 	%>
