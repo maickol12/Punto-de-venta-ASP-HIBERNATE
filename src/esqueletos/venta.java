@@ -11,6 +11,7 @@ public class venta {
 	private String n_ticket,total;
 	private double subtotal,descuento,iva,o_retenciones,monto_recibido,monto_cambio,moneda,t_cambio,comentario;
 	
+	
 	@Column(name = "f_alta",columnDefinition="DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date f_alta;
@@ -23,7 +24,6 @@ public class venta {
 	
 	private caja caj;
 	
-	private Usuario vendedor;
 
 	public int getIdventa() {
 		return idventa;
@@ -161,13 +161,6 @@ public class venta {
 		this.caj = caj;
 	}
 
-	public Usuario getVendedor() {
-		return vendedor;
-	}
-
-	public void setVendedor(Usuario vendedor) {
-		this.vendedor = vendedor;
-	}
 	
 	
 	

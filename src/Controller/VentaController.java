@@ -63,12 +63,14 @@ public class VentaController extends HttpServlet{
 		out.print("<table style='padding:10px;' class='table table-hover table-inverse' id='tableSucursales'>");
 		out.print("<tr><td>numero ticket</td><td>caja</td><td>vendedor</td><td>cliente</td><td>subtotal</td><td>descuento</td><td>iva</td><td>o retenciones</td><td>total</td><td>monto recibido</td><td>monto cambio</td><td>moneda</td><td>t cambio</td><td>comentario</td></tr>");
 		for(venta ven:ventas){
+			System.out.println("id cliente "+ven.getCli().getIdcliente());
 			makeCol(out, ven);
 		}
 		out.print("</table>");
 		out.print("<nav aria-label='Page navigation'>");
 		out.print("<ul class='pagination'>");
 		int count = getCountVentas();
+		System.out.println(count);
 		int contador = 1;
 		   for(int i = 0;i<count;i+=10){
 		    	out.print("<li><a href='#' onclick='return getSucursales("+i+")'>"+contador+"</a></li>");
@@ -88,9 +90,9 @@ public class VentaController extends HttpServlet{
 			out.print("<td id='caja"+ven.getIdventa()+"'>");
 				out.print(ven.getCaj().getCodigo_caja());
 			out.print("</td>");
-			out.print("<td id='vendedor"+ven.getIdventa()+"'>");
-				out.print(ven.getVendedor().getNombre());
-			out.print("</td>");
+			//out.print("<td id='vendedor"+ven.getIdventa()+"'>");
+				//out.print(ven.getVendedor().getNombre());
+			//out.print("</td>");
 			out.print("<td id='cliente"+ven.getIdventa()+"'>");
 				out.print(ven.getCli().getRazon_social());
 			out.print("</td>");

@@ -31,6 +31,15 @@
 		<property name="is_active" type="int">
 			<column name="is_active"/>
 		</property>
+		<property name="f_baja" type="java.util.Date">
+			<column name="f_baja"></column>
+		</property>
+		<property name="f_alta" type="java.util.Date">
+			<column name="f_alta"></column>
+		</property>
+		<property name="f_update" type="java.util.Date">
+			<column name="f_update"></column>
+		</property>
 		
 		<one-to-one name="t_u" cascade="all"></one-to-one>
 	</class>

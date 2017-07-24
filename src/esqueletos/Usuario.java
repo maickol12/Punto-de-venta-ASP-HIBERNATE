@@ -1,10 +1,28 @@
 package esqueletos;
 
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 public class Usuario {
 	private int idusuario,tipo_usuario;
 	private String username,password,email,nombre,direccion,telefono;
 	private int is_active;
 	private tipo_usuario t_u;
+	
+	@Column(name = "f_alta",columnDefinition="DATETIME")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date f_alta;
+	
+	@Column(name = "f_baja",columnDefinition="DATETIME")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date f_baja;
+	
+	@Column(name = "f_update",columnDefinition="DATETIME")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date f_update;
 	
 	public String getPassword() {
 		return password;
@@ -84,6 +102,30 @@ public class Usuario {
 
 	public void setT_u(tipo_usuario t_u) {
 		this.t_u = t_u;
+	}
+
+	public Date getF_alta() {
+		return f_alta;
+	}
+
+	public void setF_alta(Date f_alta) {
+		this.f_alta = f_alta;
+	}
+
+	public Date getF_baja() {
+		return f_baja;
+	}
+
+	public void setF_baja(Date f_baja) {
+		this.f_baja = f_baja;
+	}
+
+	public Date getF_update() {
+		return f_update;
+	}
+
+	public void setF_update(Date f_update) {
+		this.f_update = f_update;
 	}
 	
 	
