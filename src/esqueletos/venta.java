@@ -8,8 +8,8 @@ import javax.persistence.TemporalType;
 
 public class venta {
 	private int idventa,is_active;
-	private String n_ticket,total;
-	private double subtotal,descuento,iva,o_retenciones,monto_recibido,monto_cambio,moneda,t_cambio,comentario;
+	private String n_ticket,total,moneda,comentario;
+	private double subtotal,descuento,iva,o_retenciones,monto_recibido,monto_cambio,t_cambio;
 	
 	
 	@Column(name = "f_alta",columnDefinition="DATETIME")
@@ -22,7 +22,6 @@ public class venta {
 	
 	private cliente cli;
 	
-	private caja caj;
 	
 
 	public int getIdventa() {
@@ -105,11 +104,11 @@ public class venta {
 		this.monto_cambio = monto_cambio;
 	}
 
-	public double getMoneda() {
+	public String getMoneda() {
 		return moneda;
 	}
 
-	public void setMoneda(double moneda) {
+	public void setMoneda(String moneda) {
 		this.moneda = moneda;
 	}
 
@@ -121,11 +120,13 @@ public class venta {
 		this.t_cambio = t_cambio;
 	}
 
-	public double getComentario() {
+	
+
+	public String getComentario() {
 		return comentario;
 	}
 
-	public void setComentario(double comentario) {
+	public void setComentario(String comentario) {
 		this.comentario = comentario;
 	}
 
@@ -153,13 +154,7 @@ public class venta {
 		this.cli = cli;
 	}
 
-	public caja getCaj() {
-		return caj;
-	}
-
-	public void setCaj(caja caj) {
-		this.caj = caj;
-	}
+	
 
 	
 	

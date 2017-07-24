@@ -24,7 +24,7 @@
 		<!-- <one-to-one name="cli" cascade="all"></one-to-one> -->
 		<!--<one-to-one name="vendedor" cascade="all"></one-to-one> -->
 		<!--<one-to-one name="caja" cascade="all"></one-to-one> -->
-		<many-to-one name="caj" column="idcaja" class="esqueletos.caja" not-null="true" />
+		<!-- <many-to-one name="caj" column="idcaja" class="esqueletos.caja" not-null="true" /> -->
 		<many-to-one name="cli" column="idcliente" class="esqueletos.cliente" not-null="true" />
 	</class>
 </hibernate-mapping>

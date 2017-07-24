@@ -61,7 +61,8 @@ public class VentaController extends HttpServlet{
 		
 		
 		out.print("<table style='padding:10px;' class='table table-hover table-inverse' id='tableSucursales'>");
-		out.print("<tr><td>numero ticket</td><td>caja</td><td>vendedor</td><td>cliente</td><td>subtotal</td><td>descuento</td><td>iva</td><td>o retenciones</td><td>total</td><td>monto recibido</td><td>monto cambio</td><td>moneda</td><td>t cambio</td><td>comentario</td></tr>");
+		out.print("<tr><td>numero ticket</td><td>cliente</td><td>subtotal</td><td>descuento</td><td>iva</td><td>o retenciones</td><td>total</td><td>monto recibido</td><td>monto cambio</td><td>moneda</td><td>t cambio</td><td>comentario</td><td>Editar</td><td>Eliminar</td></tr>");
+		//LE QUITE ESTA COLUMNA <td>caja</td>  <td>vendedor</td>
 		for(venta ven:ventas){
 			System.out.println("id cliente "+ven.getCli().getIdcliente());
 			makeCol(out, ven);
@@ -85,11 +86,11 @@ public class VentaController extends HttpServlet{
 		public void makeCol(PrintWriter out,venta ven){
 			out.print("<tr id='"+ven.getIdventa()+"'>");
 			out.print("<td id='numeroticket"+ven.getIdventa()+"'>");
-				out.print(ven.getIdventa());
+				out.print(ven.getN_ticket());
 			out.print("</td>");	
-			out.print("<td id='caja"+ven.getIdventa()+"'>");
+			/*out.print("<td id='caja"+ven.getIdventa()+"'>");
 				out.print(ven.getCaj().getCodigo_caja());
-			out.print("</td>");
+			out.print("</td>");*/
 			//out.print("<td id='vendedor"+ven.getIdventa()+"'>");
 				//out.print(ven.getVendedor().getNombre());
 			//out.print("</td>");
