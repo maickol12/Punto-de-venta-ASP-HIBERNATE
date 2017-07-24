@@ -2,6 +2,9 @@ package Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
@@ -43,10 +47,54 @@ public class ProveedoresController extends HttpServlet{
 		}
 	}
 	
-	protected void doPost(HttpServletRequest request,HttpServletResponse response){
+	protected void doPost(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		String operacion = mg.comprobarSession(request, response);
 		
+		switch (operacion) {
+		case "addProveedor":
+			addProveedor(request,response.getWriter());
+		break;
+
+		default:
+			break;
+		}
 	}
+	private void addProveedor(HttpServletRequest request,PrintWriter out){
+		
+		proveedor pro = new proveedor();
+		
+		pro.setRazon_social(request.getParameter("razonsocial"));
+		pro.setRfc(request.getParameter("rfc"));
+		pro.setCalle(request.getParameter("calle"));
+		pro.setCiudad(request.getParameter("ciudad"));
+		pro.setCp(request.getParameter("cp"));
+		pro.setMunicipio(request.getParameter("municipio"));
+		pro.setEstado(request.getParameter("estado"));
+		pro.setPais(request.getParameter("pais"));
 	
+		pro.setIs_active(1);
+	
+
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		pro.setF_alta(date);
+		pro.setF_baja(date);
+		pro.setF_update(date);
+		
+		Transaction tx = null;
+		
+		try{
+			tx = session.getTransaction();
+			tx.begin();
+			session.save(pro);
+			getProveedores(out, 0);
+			tx.commit();
+			
+		}catch(Exception e){
+			tx.rollback();
+			System.out.println(e.getMessage());
+		}
+	}
 	private void getProveedores(PrintWriter out,int start){
 		List<proveedor> proveedores = session.createCriteria(proveedor.class).
 				add(Restrictions.eq("is_active", new Integer(1))).

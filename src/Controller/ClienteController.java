@@ -165,6 +165,7 @@ public class ClienteController extends HttpServlet{
 		Date date = new Date();
 		cli.setF_alta(date);
 		cli.setF_baja(date);
+		cli.setF_update(date);
 		
 		Transaction tx = null;
 		

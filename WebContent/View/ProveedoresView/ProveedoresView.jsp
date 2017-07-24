@@ -42,7 +42,18 @@
 				'estado':$("#estado").val(),
 				'pais':$("#pais").val()
 			}
-		alert("maicko");
+		$.ajax({
+			url:'../../ProveedoresController',
+			type:'POST',
+			data:data,
+			beforeSend:function(e){
+				$('#Proveedores').modal('toggle');
+				$("#espera").html("<center><img width='200px' height='200px' src='../../img/cargando.gif' /></center>");
+			},
+			success:function(e){
+				$("#espera").html(e);
+			}
+		});
 	}
 </script>
 
