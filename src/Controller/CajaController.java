@@ -2,6 +2,9 @@ package Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
@@ -44,6 +47,9 @@ public class CajaController extends HttpServlet{
 			case "edit":
 				editarCaja(request,response);
 			break;
+			case "addCaja":
+				addCaja(request,response.getWriter());
+			break;
 		}
 	}
 	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws IOException{
@@ -61,6 +67,34 @@ public class CajaController extends HttpServlet{
 			break;
 		}
 	}
+	private void addCaja(HttpServletRequest request,PrintWriter out){
+		String codigo_caja = request.getParameter("codigocaja");
+		int open = Integer.parseInt(request.getParameter("isopen"));
+		
+		Transaction tx = null;
+		
+		try{
+			tx = session.getTransaction();
+			tx.begin();
+			caja ca = new caja();
+			ca.setCodigo_caja(codigo_caja);
+			ca.setIs_open(open);
+			ca.setIs_active(1);
+			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			Date date = new Date();
+			ca.setF_alta(date);
+			ca.setF_baja(date);
+			ca.setF_update(date);
+			
+			session.save(ca);
+			getCajas(0, out);
+			tx.commit();
+			
+		}catch(Exception e){
+			tx.rollback();
+		}
+		
+	}
 	public void editarCaja(HttpServletRequest request,HttpServletResponse response){
 		int id = Integer.parseInt(request.getParameter("idcaja"));
 		String codigo_caja = request.getParameter("codigocaja");
@@ -73,6 +107,7 @@ public class CajaController extends HttpServlet{
 			caja c = session.get(caja.class, id);
 			c.setCodigo_caja(codigo_caja);
 			c.setIs_open(isopen);
+			c.setIs_active(1);
 			session.update(c);
 			getCajas(0, response.getWriter());
 			tx.commit();

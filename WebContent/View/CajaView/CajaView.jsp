@@ -104,4 +104,29 @@
 			}
 		});
 	});
+	function agregarCaja(){
+		var codigo_caja = $("#codigocaja").val();
+	
+		var open = ($("#activa").val()=='activa')?1:0;
+		if(confirm("Esta seguro que desea agregar la caja?")){
+
+			$.ajax({
+				url:'../../CajaController',
+				type:'POST',
+				data:{
+					'operacion':'addCaja',
+					'codigocaja':codigo_caja,
+					'isopen':open
+				},
+				beforeSend:function(e){
+					$("#Cajas").modal('toggle');
+					$("#espera").html("<center><img width='200px' height='200px' src='../../img/cargando.gif' /></center>");
+				},
+				success:function(e){
+					$("#espera").html(e);
+				}
+			});
+		}
+	}
 </script>
+<jsp:include page="ModalAgregarCaja.jsp"/>

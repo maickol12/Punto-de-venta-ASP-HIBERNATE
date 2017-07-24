@@ -18,6 +18,10 @@ public class caja {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date f_baja;
 
+	@Column(name = "f_update",columnDefinition="DATETIME")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date f_update;
+	
 	public int getIdcaja() {
 		return idcaja;
 	}
@@ -64,6 +68,14 @@ public class caja {
 
 	public void setF_baja(Date f_baja) {
 		this.f_baja = f_baja;
+	}
+
+	public Date getF_update() {
+		return f_update;
+	}
+
+	public void setF_update(Date f_update) {
+		this.f_update = f_update;
 	}
 	
 	

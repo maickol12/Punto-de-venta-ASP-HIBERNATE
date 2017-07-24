@@ -9,6 +9,7 @@
 		<property name="codigo_caja"></property>
 		<property name="f_alta"></property>
 		<property name="f_baja"></property>
+		<property name="f_update"></property>
 		<property name="is_open"></property>
 		<property name="is_active"></property>
 	</class>
