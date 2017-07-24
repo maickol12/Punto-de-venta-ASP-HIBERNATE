@@ -28,5 +28,22 @@
 			}
 		})
 	}
-
+	function agregarProveedor(){
+		data = {
+				'operacion':'addProveedor',
+				'razonsocial':$("#razonsocial").val(),
+				'rfc':$("#rfc").val(),
+				'calle':$("#calle").val(),
+				'numero':$("#numero").val(),
+				'ciudad':$("#ciudad").val(),
+				'numero':$("#numero").val(),
+				'cp':$("#cp").val(),
+				'municipio':$("#municipio").val(),
+				'estado':$("#estado").val(),
+				'pais':$("#pais").val()
+			}
+		alert("maicko");
+	}
 </script>
+
+<jsp:include page="ModalAgregarProveedor.jsp"/>
