@@ -18,6 +18,8 @@
    		<mapping resource="Model/CajaModel.hbm.xml"/>
    		<mapping resource="Model/VentaModel.hbm.xml"/>
    		<mapping resource="Model/ProveedorModel.hbm.xml"/>
+   		<mapping resource="Model/DepartamentoModel.hbm.xml"/>
+   		<mapping resource="Model/CajaDepModel.hbm.xml"/>
     </session-factory>
     
 </hibernate-configuration>

@@ -9,5 +9,8 @@
 		<property name="f_alta" type="java.util.Date"/>
 		<property name="f_update" type="java.util.Date"/>
 		<property name="f_baja" type="java.util.Date"></property>
+		
+		<many-to-one name="caj" column="idcaja" class="esqueletos.caja" not-null="true"/>
+		<many-to-one name="dep" column="iddep" class="esqueletos.departamento" not-null="true"/>
 	</class>
 </hibernate-mapping>
