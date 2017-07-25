@@ -8,8 +8,8 @@ import javax.persistence.TemporalType;
 
 public class venta {
 	private int idventa,is_active;
-	private String n_ticket,total,moneda,comentario;
-	private double subtotal,descuento,iva,o_retenciones,monto_recibido,monto_cambio,t_cambio;
+	private String n_ticket,moneda,comentario;
+	private double subtotal,total,descuento,iva,o_retenciones,monto_recibido,monto_cambio,t_cambio;
 	
 	
 	@Column(name = "f_alta",columnDefinition="DATETIME")
@@ -66,11 +66,13 @@ public class venta {
 		this.n_ticket = n_ticket;
 	}
 
-	public String getTotal() {
+	
+
+	public double getTotal() {
 		return total;
 	}
 
-	public void setTotal(String total) {
+	public void setTotal(double total) {
 		this.total = total;
 	}
 

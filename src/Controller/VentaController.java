@@ -202,11 +202,40 @@ public class VentaController extends HttpServlet{
 		double tcambio = Double.parseDouble(request.getParameter("tcambio"));
 		String comentario = request.getParameter("cambio");
 		
-		caja caj = session.get(caja.class, idcaja);
+		caja_dep caj = session.get(caja_dep.class, idcaja);
 		Usuario usu = session.get(Usuario.class, idvendedor);
 		cliente cli = session.get(cliente.class,idcliente);
 		
+		venta ven = new venta();
 		
+		ven.setN_ticket(numeroticket);
+		ven.setCaja_d(caj);
+		ven.setUsu(usu);
+		ven.setCli(cli);
+		ven.setSubtotal(subtotal);
+		ven.setDescuento(descuento);
+		ven.setIva(iva);
+		ven.setO_retenciones(retenciones);
+		ven.setTotal(total);
+		ven.setMonto_recibido(montorecibido);
+		ven.setMonto_cambio(montocambio);
+		ven.setMoneda(moneda);
+		ven.setT_cambio(tcambio);
+		ven.setComentario(comentario);
+		
+		Transaction tx = null;
+		
+		try{
+			tx = session.getTransaction();
+			session.save(ven);
+			getVentas(0, response.getWriter());
+			tx.commit();
+			tx.begin();
+			
+		}catch(Exception e){
+			tx.rollback();
+			System.out.println(e.getMessage());
+		}
 		
 	}
 	private Integer getCountVentas(){
