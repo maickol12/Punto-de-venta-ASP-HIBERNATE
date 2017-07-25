@@ -28,3 +28,4 @@
 		});
 	}
 </script>
+<jsp:include page="ModalAgregarVenta.jsp"></jsp:include>
