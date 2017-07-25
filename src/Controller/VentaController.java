@@ -19,6 +19,7 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import esqueletos.Usuario;
+import esqueletos.caja;
 import esqueletos.caja_dep;
 import esqueletos.cliente;
 import esqueletos.sucursal;
@@ -200,6 +201,12 @@ public class VentaController extends HttpServlet{
 		String moneda = request.getParameter("moneda");
 		double tcambio = Double.parseDouble(request.getParameter("tcambio"));
 		String comentario = request.getParameter("cambio");
+		
+		caja caj = session.get(caja.class, idcaja);
+		Usuario usu = session.get(Usuario.class, idvendedor);
+		cliente cli = session.get(cliente.class,idcliente);
+		
+		
 		
 	}
 	private Integer getCountVentas(){
