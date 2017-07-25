@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
@@ -200,7 +201,7 @@ public class VentaController extends HttpServlet{
 		double montocambio = Double.parseDouble(request.getParameter("montocambio"));
 		String moneda = request.getParameter("moneda");
 		double tcambio = Double.parseDouble(request.getParameter("tcambio"));
-		String comentario = request.getParameter("cambio");
+		String comentario = request.getParameter("comentario");
 		
 		caja_dep caj = session.get(caja_dep.class, idcaja);
 		Usuario usu = session.get(Usuario.class, idvendedor);
@@ -222,16 +223,18 @@ public class VentaController extends HttpServlet{
 		ven.setMoneda(moneda);
 		ven.setT_cambio(tcambio);
 		ven.setComentario(comentario);
-		
+		ven.setF_alta(new Date());
+		ven.setF_baja(new Date());
+		ven.setIs_active(1);
 		Transaction tx = null;
 		
 		try{
 			tx = session.getTransaction();
+			tx.begin();
 			session.save(ven);
 			getVentas(0, response.getWriter());
 			tx.commit();
-			tx.begin();
-			
+		
 		}catch(Exception e){
 			tx.rollback();
 			System.out.println(e.getMessage());
