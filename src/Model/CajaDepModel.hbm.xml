@@ -6,5 +6,8 @@
 			<column name="idcaja_dep"/>
 			<generator class="identity"></generator>
 		</id>
+		<property name="f_alta" type="java.util.Date"/>
+		<property name="f_update" type="java.util.Date"/>
+		<property name="f_baja" type="java.util.Date"></property>
 	</class>
 </hibernate-mapping>
