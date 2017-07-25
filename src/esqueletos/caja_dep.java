@@ -20,9 +20,7 @@ public class caja_dep {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date f_baja;
 	
-	@Column(name = "f_update",columnDefinition="DATETIME")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date f_update;
+	
 
 	
 
@@ -64,14 +62,6 @@ public class caja_dep {
 
 	public void setF_baja(Date f_baja) {
 		this.f_baja = f_baja;
-	}
-
-	public Date getF_update() {
-		return f_update;
-	}
-
-	public void setF_update(Date f_update) {
-		this.f_update = f_update;
 	}
 
 	public departamento getDep() {

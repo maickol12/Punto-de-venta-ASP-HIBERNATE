@@ -7,8 +7,7 @@
 			<generator class="identity"></generator>
 		</id>
 		<property name="f_alta" type="java.util.Date"/>
-		<property name="f_update" type="java.util.Date"/>
-		<property name="f_baja" type="java.util.Date"></property>
+		<property name="f_baja" type="java.util.Date"/>
 		
 		<many-to-one name="caj" column="idcaja" class="esqueletos.caja" not-null="true"/>
 		<many-to-one name="dep" column="iddep" class="esqueletos.departamento" not-null="true"/>
