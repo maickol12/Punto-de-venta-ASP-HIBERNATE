@@ -7,7 +7,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 public class caja_dep {
-	private int idcaja_dep,iddep;
+	private int idcaja_dep,iddep,is_active;
 	
 	private caja caj;
 	private departamento dep;
@@ -70,6 +70,14 @@ public class caja_dep {
 
 	public void setDep(departamento dep) {
 		this.dep = dep;
+	}
+
+	public int getIs_active() {
+		return is_active;
+	}
+
+	public void setIs_active(int is_active) {
+		this.is_active = is_active;
 	}
 	
 	
