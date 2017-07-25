@@ -47,7 +47,7 @@
          </div> 
          <div class="form-group">
           	<label>Total...</label>
-	         <input id="Total" class="form-control" placeholder="Total..." type="text"/>
+	         <input id="total" class="form-control" placeholder="Total..." type="text"/>
          </div> 
          <div class="form-group">
           	<label>Monto recibido...</label>
@@ -76,7 +76,7 @@
          
       </div>
            <center>
-           		<button type="submit" class="btn btn-primary" onclick="return agregarSucursal();")>
+           		<button type="submit" class="btn btn-primary" onclick="return agregarVenta();")>
            			Guardar Venta
            		</button>
            </center>

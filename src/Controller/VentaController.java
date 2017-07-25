@@ -61,6 +61,9 @@ public class VentaController extends HttpServlet{
 			case "makeSelectCliente":
 				makeSelectCliente(response.getWriter());
 			break;
+			case "addVenta":
+				addVenta(request,response);
+			break;
 		}
 	}
 	
@@ -182,7 +185,23 @@ public class VentaController extends HttpServlet{
 			out.println("<option value='"+cli.getIdcliente()+"'>"+cli.getRazon_social()+"</option>");
 		}
 	}
-	
+	private void addVenta(HttpServletRequest request,HttpServletResponse response){
+		String numeroticket = request.getParameter("numeroticket");
+		int idcaja = Integer.parseInt(request.getParameter("idcaja"));
+		int idvendedor = Integer.parseInt(request.getParameter("idvendedor"));
+		int idcliente = Integer.parseInt(request.getParameter("idcliente"));
+		double subtotal = Double.parseDouble(request.getParameter("subtotal"));
+		double descuento = Double.parseDouble(request.getParameter("descuento"));
+		double iva = Double.parseDouble(request.getParameter("iva"));
+		double retenciones = Double.parseDouble(request.getParameter("retenciones"));
+		double total = Double.parseDouble(request.getParameter("total"));
+		double montorecibido = Double.parseDouble(request.getParameter("montorecibido"));
+		double montocambio = Double.parseDouble(request.getParameter("montocambio"));
+		String moneda = request.getParameter("moneda");
+		double tcambio = Double.parseDouble(request.getParameter("tcambio"));
+		String comentario = request.getParameter("cambio");
+		
+	}
 	private Integer getCountVentas(){
 		return ((Long)session.createCriteria(venta.class).setProjection(Projections.rowCount()).add(Restrictions.eq("is_active", new Integer(1))).uniqueResult()).intValue();
 	}
