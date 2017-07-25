@@ -18,6 +18,9 @@ import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
+import esqueletos.Usuario;
+import esqueletos.caja_dep;
+import esqueletos.cliente;
 import esqueletos.sucursal;
 import esqueletos.venta;
 import generales.metodos_generales;
@@ -41,13 +44,24 @@ public class VentaController extends HttpServlet{
 		case "getventas":
 			getVentas(Integer.parseInt(request.getParameter("start")),response.getWriter());
 		break;
-
 		default:
 			break;
 		}
 	}
-	protected void doPost(HttpServletRequest request,HttpServletResponse response){
+	protected void doPost(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		String operacion = mg.comprobarSession(request, response);
 		
+		switch (operacion) {
+			case "makeSelectVendedor":
+				makeSelectVendedor(response.getWriter());
+			break;
+			case "makeSelectCajaDep":
+				makeSelectCajaDep(response.getWriter());
+			break;
+			case "makeSelectCliente":
+				makeSelectCliente(response.getWriter());
+			break;
+		}
 	}
 	
 	private void getVentas(int start,PrintWriter out){
@@ -136,7 +150,39 @@ public class VentaController extends HttpServlet{
 				out.print("<a href='#' onclick='return editar("+ven.getIdventa()+")'><img width='30px' height='30px' src='../../img/update.png'/></a>");
 			out.print("</td>");
 		out.print("</tr>");
+	}
+	private void makeSelectVendedor(PrintWriter out){
+		List<Usuario> usuarios = session.createCriteria(Usuario.class).
+				add(Restrictions.eq("is_active", new Integer(1))).
+				list();
+		
+		for (int i = 0; i < usuarios.size(); i++) {
+			Usuario user = usuarios.get(i);
+			System.out.println(i);
+			out.println("<option value='"+user.getIdusuario()+"'>"+user.getUsername()+"</option>");
 		}
+	}
+	private void makeSelectCajaDep(PrintWriter out){
+		List<caja_dep> cajas = session.createCriteria(caja_dep.class).
+				add(Restrictions.eq("is_active", new Integer(1))).
+				list();
+		for (int i = 0; i < cajas.size(); i++) {
+			caja_dep cp = cajas.get(i);
+			System.out.println(i);
+			out.println("<option value='"+cp.getIdcaja_dep()+"'>"+cp.getCaj().getCodigo_caja()+"</option>");
+		}
+	}
+	private void makeSelectCliente(PrintWriter out){
+		List<cliente> clientes = session.createCriteria(cliente.class).
+				add(Restrictions.eq("is_active", new Integer(1))).
+				list();
+		for (int i = 0; i < clientes.size(); i++) {
+			cliente cli = clientes.get(i);
+			System.out.println(i);
+			out.println("<option value='"+cli.getIdcliente()+"'>"+cli.getRazon_social()+"</option>");
+		}
+	}
+	
 	private Integer getCountVentas(){
 		return ((Long)session.createCriteria(venta.class).setProjection(Projections.rowCount()).add(Restrictions.eq("is_active", new Integer(1))).uniqueResult()).intValue();
 	}
