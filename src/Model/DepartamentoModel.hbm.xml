@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 <hibernate-mapping>
+	<class name="esqueletos.departamento">
+		<id name="iddepartamento">
+			<column name="iddepartamento"/>
+			<generator class="identity"></generator>
+		</id>
+		<property name="nombre_dep"/>
+		<property name="f_alta" type="java.util.Date"/>
+		<property name="f_baja" type="java.util.Date"/>
+		<property name="f_update" type="java.util.Date"/>
+		<many-to-one name="suc" column="idsucursal" class="esqueletos.sucursal" not-null="true"/>
+		
+	</class>
 </hibernate-mapping>
