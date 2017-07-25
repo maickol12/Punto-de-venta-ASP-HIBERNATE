@@ -21,6 +21,8 @@ public class venta {
 	private Date f_baja;
 	
 	private cliente cli;
+	private Usuario usu;
+	
 	
 	
 
