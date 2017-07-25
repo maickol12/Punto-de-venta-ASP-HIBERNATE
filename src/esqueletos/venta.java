@@ -22,9 +22,25 @@ public class venta {
 	
 	private cliente cli;
 	private Usuario usu;
+	private caja_dep caja_d;
 	
 	
-	
+
+	public Usuario getUsu() {
+		return usu;
+	}
+
+	public void setUsu(Usuario usu) {
+		this.usu = usu;
+	}
+
+	public caja_dep getCaja_d() {
+		return caja_d;
+	}
+
+	public void setCaja_d(caja_dep caja_d) {
+		this.caja_d = caja_d;
+	}
 
 	public int getIdventa() {
 		return idventa;

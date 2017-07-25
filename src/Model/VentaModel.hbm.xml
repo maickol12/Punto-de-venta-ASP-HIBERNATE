@@ -21,10 +21,8 @@
 		<property name="f_baja"></property>
 		<property name="is_active"></property>
 		
-		<!-- <one-to-one name="cli" cascade="all"></one-to-one> -->
-		<!--<one-to-one name="vendedor" cascade="all"></one-to-one> -->
-		<!--<one-to-one name="caja" cascade="all"></one-to-one> -->
-		<!-- <many-to-one name="caj" column="idcaja" class="esqueletos.caja" not-null="true" /> -->
+		<many-to-one name="usu" column="idusuario" class="esqueletos.Usuario" not-null="true"/>
+		<many-to-one name="caja_d" column="idcaja_dep" class="esqueletos.caja_dep" not-null="true" /> 
 		<many-to-one name="cli" column="idcliente" class="esqueletos.cliente" not-null="true" />
 	</class>
 </hibernate-mapping>
