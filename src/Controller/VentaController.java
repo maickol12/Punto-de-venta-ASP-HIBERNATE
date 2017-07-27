@@ -66,6 +66,25 @@ public class VentaController extends HttpServlet{
 			case "addVenta":
 				addVenta(request,response);
 			break;
+			case "delete":
+				deleteVenta(request,response);
+			break;
+		}
+	}
+	private void deleteVenta(HttpServletRequest request,HttpServletResponse response){
+		venta ven = session.get(venta.class, Integer.parseInt(request.getParameter("id")));
+		Transaction tx = null;
+		try{
+			tx = session.getTransaction();
+			tx.begin();
+			ven.setIs_active(0);
+			getVentas(0, response.getWriter());
+			response.setStatus(200);
+			tx.commit();
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+			response.setStatus(400);
+			tx.rollback();
 		}
 	}
 	
@@ -94,7 +113,7 @@ public class VentaController extends HttpServlet{
 		System.out.println(count);
 		int contador = 1;
 		   for(int i = 0;i<count;i+=10){
-		    	out.print("<li><a href='#' onclick='return getSucursales("+i+")'>"+contador+"</a></li>");
+		    	out.print("<li><a href='#' onclick='return getVentas("+i+")'>"+contador+"</a></li>");
 		    	contador++;
 		    }
 		out.print("</li>");
@@ -163,7 +182,7 @@ public class VentaController extends HttpServlet{
 		
 		for (int i = 0; i < usuarios.size(); i++) {
 			Usuario user = usuarios.get(i);
-			System.out.println(i);
+
 			out.println("<option value='"+user.getIdusuario()+"'>"+user.getUsername()+"</option>");
 		}
 	}
@@ -183,7 +202,6 @@ public class VentaController extends HttpServlet{
 				list();
 		for (int i = 0; i < clientes.size(); i++) {
 			cliente cli = clientes.get(i);
-			System.out.println(i);
 			out.println("<option value='"+cli.getIdcliente()+"'>"+cli.getRazon_social()+"</option>");
 		}
 	}

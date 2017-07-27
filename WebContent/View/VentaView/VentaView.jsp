@@ -61,5 +61,27 @@
 		});
 		return null;
 	}
+	function editar(id){
+		
+	}
+	function eliminar(id){
+		if(confirm("Esta seguro que desea realizar la eliminacion?")){
+			$.ajax({
+				url:'../../VentaController',
+				type:'POST',
+				data:{
+					'id':id,
+					'operacion':'delete'
+				},
+				beforeSend:function(e){
+					$("#espera").html("<center><img width='200px' height='200px' src='../../img/cargando.gif' /></center>");
+				},
+				success:function(e){
+					$("#espera").html(e);
+				}
+			});
+		}
+		return null;
+	}
 </script>
 <jsp:include page="ModalAgregarVenta.jsp"></jsp:include>
